@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عقارات مصر - بيع وتأجير</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>عقارات مصر</h1>
+    <nav>
+      <a href="#" id="homeBtn">الرئيسية</a>
+      <a href="#" id="sellBtn">عقارات للبيع</a>
+      <a href="#" id="rentBtn">عقارات للإيجار</a>
+      <a href="#" id="addBtn">إضافة عقار</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>ابحث عن بيت أحلامك بسهولة</h2>
+    <p>بيع واشتري أو استأجر عقارك في أي مكان في مصر</p>
+  </section>
+
+  <section id="propertyList" class="listings">
+    <h2>أحدث العقارات</h2>
+    <div class="property">
+      <h3>شقة فاخرة في القاهرة</h3>
+      <p>السعر: 2,000,000 جنيه</p>
+      <p>الموقع: التجمع الخامس</p>
+    </div>
+
+    <div class="property">
+      <h3>فيلا للإيجار في 6 أكتوبر</h3>
+      <p>السعر: 25,000 جنيه / شهر</p>
+      <p>الموقع: الحي الرابع</p>
+    </div>
+  </section>
+
+  <section id="addPropertySection" class="add-form hidden">
+    <h2>إضافة عقار جديد</h2>
+    <form id="addForm">
+      <label>اسم العقار:</label>
+      <input type="text" id="name" required>
+
+      <label>السعر:</label>
+      <input type="text" id="price" required>
+
+      <label>الموقع:</label>
+      <input type="text" id="location" required>
+
+      <label>نوع العقار:</label>
+      <select id="type">
+        <option value="بيع">بيع</option>
+        <option value="إيجار">إيجار</option>
+      </select>
+
+      <button type="submit">إضافة</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 عقارات مصر | جميع الحقوق محفوظة</p>
+  </footer>
+</body>
+</html>
