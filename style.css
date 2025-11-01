@@ -1,130 +1,153 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Cairo", sans-serif;
-}
-
+/* إعدادات أساسية */
 body {
-  color: #222;
-  background: #f8f9fa;
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+    color: #333;
 }
 
-/* --- Navbar --- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* الشريط العلوي */
+.top-bar {
+    background-color: #222;
+    color: #ccc;
+    padding: 8px 0;
+    font-size: 14px;
+}
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-bar-left span {
+    margin-left: 20px;
+}
+.top-bar-left i {
+    margin-left: 5px;
+    color: #2a41e8;
+}
+.btn-buy-now {
+    background-color: #82b440;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* 1. شريط التنقل */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
+    background-color: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    position: sticky; /* يجعله يلتصق بالأعلى عند التمرير */
+    top: 0;
+    z-index: 1000;
 }
-
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .logo {
-  font-size: 26px;
-  font-weight: bold;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2a41e8;
+    text-decoration: none;
 }
-.logo span {
-  color: #00d084;
+.nav-links ul { list-style: none; margin: 0; padding: 0; display: flex; }
+.nav-links li a { text-decoration: none; color: #555; padding: 10px 15px; font-weight: 500; transition: color 0.3s; }
+.nav-links li a:hover, .nav-links li a.active { color: #2a41e8; }
+.btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: #fff; font-weight: bold; }
+.btn-primary { background-color: #2a41e8; }
+
+/* 2. قسم البحث الرئيسي */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-background.jpg') center/cover no-repeat;
+    height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+.hero-content h1 { font-size: 48px; margin-bottom: 30px; }
+.search-bar { background-color: #fff; padding: 15px; border-radius: 8px; display: flex; gap: 10px; max-width: 800px; margin: 0 auto; }
+.search-bar input, .search-bar select { padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+.search-bar input[type="text"] { flex-grow: 1; }
+.btn-search { background-color: #2a41e8; color: white; border: none; padding: 0 25px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+
+/* 3. قسم العقارات */
+.properties-section { padding: 60px 0; }
+.properties-section h2 { text-align: center; font-size: 32px; margin-bottom: 40px; }
+.properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+.property-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.property-card:hover { transform: translateY(-5px); }
+
+.property-image-container {
+    position: relative;
+}
+.property-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+/* تسمية حالة العقار */
+.property-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.property-status.for-sale { background-color: #2a41e8; } /* أزرق للبيع */
+.property-status.for-rent { background-color: #82b440; } /* أخضر للإيجار */
+
+/* أزرار الإجراءات على الصورة */
+.property-actions {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 8px;
+}
+.action-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+.action-btn:hover {
+    background-color: #2a41e8;
+    color: white;
+}
+.action-btn.active {
+    background-color: #e82a2a; /* لون أحمر عند التفعيل */
+    color: white;
 }
 
-.navbar ul {
-  display: flex;
-  list-style: none;
-  gap: 25px;
-}
-
-.navbar ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-.navbar ul li a:hover {
-  color: #00d084;
-}
-
-/* --- Hero Section --- */
-.hero {
-  background-image: url("images/banner.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
-}
-
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-  top: 0;
-  left: 0;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-}
-
-.hero-content h1 {
-  font-size: 45px;
-  margin-bottom: 10px;
-}
-
-.hero-content p {
-  font-size: 18px;
-  margin-bottom: 25px;
-}
-
-.search-box {
-  display: flex;
-  justify-content: center;
-  background: #fff;
-  border-radius: 50px;
-  overflow: hidden;
-  max-width: 450px;
-  margin: 0 auto;
-}
-
-.search-box input {
-  border: none;
-  outline: none;
-  padding: 14px 18px;
-  flex: 1;
-  font-size: 16px;
-}
-
-.search-box button {
-  background: #00d084;
-  border: none;
-  color: #fff;
-  padding: 14px 30px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.search-box button:hover {
-  background: #00b372;
-}
-
-/* --- Footer --- */
-footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-}
+.property-info { padding: 20px; }
+.property-info h3 { margin: 0 0 5px 0; font-size: 18px; }
+.property-info .address { color: #777; font-size: 14px; margin-bottom: 15px; }
+.features { display: flex; gap: 15px; color: #555; margin-bottom: 15px; }
+.features span i { margin-left: 5px; color: #2a41e8; }
+.price { font-size: 22px; font-weight: bold; color: #2a41e8; text-align: left; }
