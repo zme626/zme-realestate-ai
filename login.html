@@ -3,59 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول / إنشاء حساب - Nova HOME</title>
+    <title>لوحة التحكم - Nova HOME</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+
+    <!-- شريط التنقل سيظهر تلقائيًا بشكل المستخدم المسجل بفضل script.js -->
     <header class="navbar">
         <div class="container">
             <div class="navbar-left">
                 <a href="index.html" class="logo">Nova HOME</a>
             </div>
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">قائمة العقارات</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="navbar-right">
+                <!-- هذا الجزء يتم ملؤه بواسطة script.js -->
+            </div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <div class="auth-page">
-        <div class="auth-container">
-            <!-- نموذج تسجيل الدخول -->
-            <div class="auth-form" id="login">
-                <h2>تسجيل الدخول</h2>
-                <p>مرحباً بعودتك! أدخل بياناتك للمتابعة.</p>
-                <form action="#" method="POST">
-                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-                    <input type="password" name="password" placeholder="كلمة المرور" required>
-                    <button type="submit" class="btn btn-primary full-width">تسجيل الدخول</button>
-                </form>
-                <div class="divider"><span>أو</span></div>
-                <button class="btn-google full-width">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
-                    المتابعة باستخدام جوجل
-                </button>
-                <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
-            </div>
+    <main class="page-header-section">
+        <div class="container">
+            <h1>لوحة التحكم</h1>
+            <p>مرحباً بك في حسابك في Nova HOME.</p>
+        </div>
+    </main>
 
-            <!-- نموذج إنشاء حساب -->
-            <div class="auth-form" id="signup" style="display:none;">
-                <h2>إنشاء حساب جديد</h2>
-                <p>انضم إلينا وابدأ في البحث عن عقار أحلامك.</p>
-                <form action="#" method="POST">
-                    <input type="text" name="fullname" placeholder="الاسم بالكامل" required>
-                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-                    <input type="password" name="password" placeholder="كلمة المرور" required>
-                    <button type="submit" class="btn btn-primary full-width">إنشاء حساب</button>
-                </form>
-                <div class="divider"><span>أو</span></div>
-                <button class="btn-google full-width">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
-                    المتابعة باستخدام جوجل
-                </button>
-                <p class="switch-form">لديك حساب بالفعل؟ <a href="#login">سجل الدخول</a></p>
+    <section class="dashboard-section" style="padding: 60px 0;">
+        <div class="container">
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-user" style="font-size: 40px; color: #005c99; margin-bottom: 15px;"></i>
+                    <h3>ملفي الشخصي</h3>
+                    <p style="color: #777;">عرض وتعديل بياناتك</p>
+                    <a href="profile.html" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-heart" style="font-size: 40px; color: #e82a2a; margin-bottom: 15px;"></i>
+                    <h3>عقاراتي المفضلة</h3>
+                    <p style="color: #777;">عرض العقارات التي أعجبتك</p>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-plus" style="font-size: 40px; color: #82b440; margin-bottom: 15px;"></i>
+                    <h3>أضف عقار جديد</h3>
+                    <p style="color: #777;">عرض عقارك للبيع أو الإيجار</p>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ==================== السطر المفقود الذي تم إضافته هنا ==================== -->
     <script src="script.js"></script>
 </body>
 </html>
