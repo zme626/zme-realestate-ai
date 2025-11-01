@@ -8,13 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="container"><a href="index.html" class="logo">Nova HOME</a></div>
-    </header>
-
+    <header class="navbar"><div class="container"><a href="index.html" class="logo">Nova HOME</a></div></header>
     <div class="auth-page">
         <div class="auth-container">
-            <!-- نموذج تسجيل الدخول -->
             <div class="auth-form" id="login">
                 <h2>تسجيل الدخول</h2>
                 <form id="login-form">
@@ -23,14 +19,9 @@
                     <button type="submit" class="btn btn-primary full-width">تسجيل الدخول</button>
                 </form>
                 <div class="divider"><span>أو</span></div>
-                <button onclick="authFunctions.signInWithGoogle()" class="btn-google full-width">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
-                    المتابعة باستخدام جوجل
-                </button>
+                <button id="google-signin-btn" class="btn-google full-width"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo"> المتابعة باستخدام جوجل</button>
                 <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
             </div>
-
-            <!-- نموذج إنشاء حساب -->
             <div class="auth-form" id="signup" style="display:none;">
                 <h2>إنشاء حساب جديد</h2>
                 <form id="signup-form">
@@ -43,28 +34,23 @@
             </div>
         </div>
     </div>
-
-    <!-- 1. ربط ملف Firebase (كما كان) -->
     <script type="module" src="static/js/firebase.js"></script>
-    
-    <!-- 2. كود ربط النماذج بالدوال (كما كان) -->
+    <script src="script.js"></script>
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            window.authFunctions.signInWithEmail(email, password);
-        });
-
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            window.authFunctions.signUpWithEmail(email, password);
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.authFunctions) { console.error("Auth functions not loaded"); return; }
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
+            });
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value);
+            });
+            document.getElementById('google-signin-btn').addEventListener('click', function() {
+                window.authFunctions.signInWithGoogle();
+            });
         });
     </script>
-
-    <!-- 3. === السطر المفقود الذي تم إضافته لإصلاح المشكلة === -->
-    <script src="script.js"></script>
 </body>
 </html>

@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-
-    <!-- شريط التنقل -->
     <header class="navbar">
         <div class="container">
             <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
@@ -28,63 +26,32 @@
         </div>
     </header>
 
-    <!-- سيتم ملء هذا الجزء بالكامل بواسطة JavaScript -->
     <main id="property-details-content" class="property-details-page">
-        <div class="container">
-            <p style="text-align: center; padding: 50px 0;">جاري تحميل تفاصيل العقار...</p>
-        </div>
+        <div class="container"><p style="text-align: center; padding: 50px 0;">جاري تحميل تفاصيل العقار...</p></div>
     </main>
 
-    <!-- ربط ملفات الجافاسكريبت -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
-
-    <!-- كود جافاسكريبت خاص بصفحة تفاصيل العقار -->
     <script type="module">
         const contentDiv = document.getElementById('property-details-content');
-
         async function loadPropertyDetails() {
-            // 1. قراءة الـ ID من رابط URL
             const urlParams = new URLSearchParams(window.location.search);
             const propertyId = urlParams.get('id');
-
-            if (!propertyId) {
-                contentDiv.innerHTML = '<div class="container"><p>خطأ: لم يتم تحديد مُعرّف العقار.</p></div>';
-                return;
-            }
-
+            if (!propertyId) { contentDiv.innerHTML = '<div class="container"><p>خطأ: لم يتم تحديد مُعرّف العقار.</p></div>'; return; }
+            if (!window.dbFunctions) { setTimeout(loadPropertyDetails, 100); return; }
             try {
-                // 2. جلب بيانات العقار المحدد من Firestore
                 const prop = await window.dbFunctions.getPropertyById(propertyId);
-
-                if (!prop) {
-                    contentDiv.innerHTML = '<div class="container"><p>خطأ: العقار المطلوب غير موجود.</p></div>';
-                    return;
-                }
-
-                // 3. تغيير عنوان الصفحة
+                if (!prop) { contentDiv.innerHTML = '<div class="container"><p>خطأ: العقار المطلوب غير موجود.</p></div>'; return; }
                 document.title = `${prop.title} - Nova HOME`;
-
-                // 4. بناء كود HTML الديناميكي
-                const priceString = prop.type === 'rent' 
-                    ? `${prop.price.toLocaleString()} جنيه / شهرياً`
-                    : `${prop.price.toLocaleString()} جنيه`;
-
+                const priceString = prop.type === 'rent' ? `${prop.price.toLocaleString()} جنيه / شهرياً` : `${prop.price.toLocaleString()} جنيه`;
                 const htmlContent = `
                     <div class="container">
                         <div class="details-header">
-                            <div>
-                                <h1>${prop.title}</h1>
-                                <p class="address"><i class="fa-solid fa-location-dot"></i> ${prop.address}</p>
-                            </div>
+                            <div><h1>${prop.title}</h1><p class="address"><i class="fa-solid fa-location-dot"></i> ${prop.address}</p></div>
                             <div class="price-tag">${priceString}</div>
                         </div>
-                        <div class="gallery">
-                            <div class="main-image">
-                                <img src="${prop.imageUrl}" alt="صورة رئيسية للعقار">
-                            </div>
-                        </div>
+                        <div class="gallery"><div class="main-image"><img src="${prop.imageUrl}" alt="صورة رئيسية للعقار"></div></div>
                         <div class="details-layout">
                             <div class="main-content">
                                 <h2>المواصفات الأساسية</h2>
@@ -97,36 +64,21 @@
                             <aside class="sidebar">
                                 <div class="contact-form-box">
                                     <h3>تواصل مع الوكيل</h3>
-                                    <form>
-                                        <input type="text" placeholder="الاسم" required>
-                                        <input type="email" placeholder="البريد الإلكتروني" required>
-                                        <textarea rows="5" placeholder="مرحباً، أنا مهتم بهذا العقار..." required></textarea>
-                                        <button type="submit" class="btn btn-primary full-width">إرسال رسالة</button>
-                                    </form>
+                                    <form><input type="text" placeholder="الاسم" required><input type="email" placeholder="البريد الإلكتروني" required><textarea rows="5" placeholder="مرحباً، أنا مهتم بهذا العقار..." required></textarea><button type="submit" class="btn btn-primary full-width">إرسال رسالة</button></form>
                                 </div>
                             </aside>
                         </div>
-                        <div class="map-section">
-                            <h2>موقع العقار</h2>
-                            <div id="map"></div>
-                        </div>
-                    </div>
-                `;
-
-                // 5. وضع الكود في الصفحة
+                        <div class="map-section"><h2>موقع العقار</h2><div id="map"></div></div>
+                    </div>`;
                 contentDiv.innerHTML = htmlContent;
-
-                // 6. تفعيل الخريطة (بعد وضعها في الصفحة)
-                const map = L.map('map').setView([30.0444, 31.2357], 13); // إحداثيات افتراضية
+                const map = L.map('map').setView([30.0444, 31.2357], 13);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
                 L.marker([30.0444, 31.2357]).addTo(map).bindPopup(prop.address).openPopup();
-
             } catch (error) {
                 console.error("Error loading property details: ", error);
                 contentDiv.innerHTML = '<div class="container"><p>حدث خطأ أثناء تحميل تفاصيل العقار.</p></div>';
             }
         }
-
         loadPropertyDetails();
     </script>
 </body>

@@ -9,7 +9,6 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
@@ -22,12 +21,9 @@
         </div>
     </div>
 
-    <!-- شريط التنقل -->
     <header class="navbar">
         <div class="container">
-            <div class="navbar-left">
-                <a href="index.html" class="logo">Nova HOME</a>
-            </div>
+            <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
             <div class="navbar-center">
                 <nav class="main-nav">
                     <ul class="nav-links">
@@ -37,87 +33,51 @@
                     </ul>
                 </nav>
             </div>
-            <div class="navbar-right">
-                <!-- هذا الجزء يتم ملؤه بواسطة script.js -->
-            </div>
+            <div class="navbar-right"></div>
             <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- قسم البحث الرئيسي -->
     <main class="hero-section">
         <div class="hero-content">
             <h1>ابحث عن منزل أحلامك</h1>
             <div class="search-bar">
-                <select>
-                    <option>شراء</option>
-                    <option>إيجار</option>
-                </select>
-                <select>
-                    <option>شقق</option>
-                    <option>فلل</option>
-                    <option>أراضي</option>
-                </select>
+                <select><option>شراء</option><option>إيجار</option></select>
+                <select><option>شقق</option><option>فلل</option></select>
                 <input type="text" placeholder="ابحث بالمنطقة أو العنوان...">
                 <button class="btn-search"><i class="fa fa-search"></i> بحث</button>
             </div>
         </div>
     </main>
 
-    <!-- قسم عرض العقارات -->
     <section class="properties-section">
         <div class="container">
             <h2>العقارات المميزة</h2>
-            <!-- سيتم ملء هذا الجزء ديناميكيًا بواسطة JavaScript -->
-            <div class="properties-grid" id="properties-grid">
-                <!-- يتم عرض بطاقات العقارات الحقيقية من Firestore هنا -->
-                <p>جاري تحميل العقارات...</p>
-            </div>
+            <div class="properties-grid" id="properties-grid"><p>جاري تحميل العقارات...</p></div>
         </div>
     </section>
 
-    <!-- ربط ملفات الجافاسكريبت -->
     <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
-
-    <!-- كود جافاسكريبت خاص بالصفحة الرئيسية لجلب البيانات -->
     <script type="module">
         const propertiesGrid = document.getElementById('properties-grid');
-
         async function loadProperties() {
-            // التأكد من أن دوال قاعدة البيانات قد تم تحميلها
-            if (!window.dbFunctions || !window.dbFunctions.getProperties) {
-                console.error("Firestore functions not available yet.");
-                propertiesGrid.innerHTML = '<p>خطأ في تهيئة قاعدة البيانات. يرجى المحاولة مرة أخرى.</p>';
-                return;
-            }
-
+            if (!window.dbFunctions) { setTimeout(loadProperties, 100); return; }
             try {
                 const properties = await window.dbFunctions.getProperties();
-                propertiesGrid.innerHTML = ''; // تفريغ رسالة "جاري التحميل"
-
+                propertiesGrid.innerHTML = '';
                 if (properties.length === 0) {
                     propertiesGrid.innerHTML = '<p>لا توجد عقارات متاحة حاليًا.</p>';
                     return;
                 }
-
                 properties.forEach(prop => {
-                    const priceString = prop.type === 'rent' 
-                        ? `${prop.price.toLocaleString()} جنيه / شهرياً`
-                        : `${prop.price.toLocaleString()} جنيه`;
-
+                    const priceString = prop.type === 'rent' ? `${prop.price.toLocaleString()} جنيه / شهرياً` : `${prop.price.toLocaleString()} جنيه`;
                     const card = `
                         <a href="property-details.html?id=${prop.id}" class="property-card-link">
                             <div class="property-card">
                                 <div class="property-image-container">
                                     <img src="${prop.imageUrl}" alt="${prop.title}">
-                                    <div class="property-status ${prop.type === 'sale' ? 'for-sale' : 'for-rent'}">
-                                        ${prop.type === 'sale' ? 'للبيع' : 'للإيجار'}
-                                    </div>
-                                    <div class="property-actions">
-                                        <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
-                                        <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
-                                    </div>
+                                    <div class="property-status ${prop.type === 'sale' ? 'for-sale' : 'for-rent'}">${prop.type === 'sale' ? 'للبيع' : 'للإيجار'}</div>
                                 </div>
                                 <div class="property-info">
                                     <h3>${prop.title}</h3>
@@ -130,19 +90,15 @@
                                     <div class="price">${priceString}</div>
                                 </div>
                             </div>
-                        </a>
-                    `;
+                        </a>`;
                     propertiesGrid.innerHTML += card;
                 });
             } catch (error) {
                 console.error("Error loading properties: ", error);
-                propertiesGrid.innerHTML = '<p>حدث خطأ أثناء تحميل العقارات. يرجى التحقق من وحدة التحكم.</p>';
+                propertiesGrid.innerHTML = '<p>حدث خطأ أثناء تحميل العقارات.</p>';
             }
         }
-
-        // استدعاء الدالة عند تحميل الصفحة
         loadProperties();
     </script>
-
 </body>
 </html>

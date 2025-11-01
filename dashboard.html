@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Nova HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="dashboard.html" class="active">لوحة التحكم</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="navbar-right"></div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+    <main class="page-header-section">
+        <div class="container"><h1>لوحة التحكم</h1><p>مرحباً بك في حسابك في Nova HOME.</p></div>
+    </main>
+    <section class="dashboard-section" style="padding: 60px 0;">
+        <div class="container">
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-user" style="font-size: 40px; color: #005c99; margin-bottom: 15px;"></i>
+                    <h3>ملفي الشخصي</h3><p style="color: #777;">عرض وتعديل بياناتك</p>
+                    <a href="profile.html" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-plus" style="font-size: 40px; color: #82b440; margin-bottom: 15px;"></i>
+                    <h3>أضف عقار جديد</h3><p style="color: #777;">عرض عقارك للبيع أو الإيجار</p>
+                    <a href="add-property.html" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+                <div class="dashboard-card" style="background: #fff; padding: 25px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <i class="fa-solid fa-heart" style="font-size: 40px; color: #e82a2a; margin-bottom: 15px;"></i>
+                    <h3>عقاراتي المفضلة</h3><p style="color: #777;">عرض العقارات التي أعجبتك</p>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; box-sizing: border-box;">الانتقال</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="static/js/firebase.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
