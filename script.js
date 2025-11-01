@@ -1,74 +1,36 @@
-// تسجيل الدخول وإنشاء حساب بسيط باستخدام localStorage
+const properties = [
+  { name: "شقة فاخرة", city: "القاهرة", price: "1,200,000 جنيه", type: "sale" },
+  { name: "فيلا حديثة", city: "الأسكندرية", price: "3,000,000 جنيه", type: "sale" },
+  { name: "شقة للإيجار", city: "الجيزة", price: "6,000 جنيه/شهر", type: "rent" },
+  { name: "مكتب إداري", city: "القاهرة", price: "12,000 جنيه/شهر", type: "rent" }
+];
 
-function signup() {
-  const username = document.getElementById('signup-username').value;
-  const password = document.getElementById('signup-password').value;
-
-  if (!username || !password) {
-    alert('من فضلك أدخل اسم المستخدم وكلمة المرور');
-    return;
-  }
-
-  if (localStorage.getItem(username)) {
-    alert('اسم المستخدم مسجل بالفعل!');
-  } else {
-    localStorage.setItem(username, password);
-    alert('تم إنشاء الحساب بنجاح!');
-  }
-}
-
-function login() {
-  const username = document.getElementById('login-username').value;
-  const password = document.getElementById('login-password').value;
-
-  const storedPassword = localStorage.getItem(username);
-
-  if (storedPassword && storedPassword === password) {
-    alert('تم تسجيل الدخول بنجاح');
-    window.location.href = 'dashboard.html';
-  } else {
-    alert('اسم المستخدم أو كلمة المرور غير صحيحة');
-  }
-}
-
-function logout() {
-  window.location.href = 'index.html';
-}
-
-// إضافة عقار
-function addProperty() {
-  const title = document.getElementById('title').value;
-  const price = document.getElementById('price').value;
-  const description = document.getElementById('description').value;
-
-  if (!title || !price || !description) {
-    alert('من فضلك أدخل كل البيانات');
-    return;
-  }
-
-  const property = { title, price, description };
-  let properties = JSON.parse(localStorage.getItem('properties')) || [];
-  properties.push(property);
-  localStorage.setItem('properties', JSON.stringify(properties));
-
-  alert('تم إضافة العقار بنجاح');
-  displayProperties();
-}
-
-function displayProperties() {
-  const propertyList = document.getElementById('propertyList');
-  propertyList.innerHTML = '';
-
-  const properties = JSON.parse(localStorage.getItem('properties')) || [];
-  properties.forEach((p, index) => {
-    const li = document.createElement('li');
-    li.textContent = `${p.title} - ${p.price} جنيه`;
-    propertyList.appendChild(li);
+function displayProperties(list) {
+  const container = document.getElementById("propertyList");
+  container.innerHTML = "";
+  list.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "property-card";
+    card.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>📍 ${p.city}</p>
+      <p>💰 ${p.price}</p>
+      <p>🏷️ النوع: ${p.type === "sale" ? "بيع" : "إيجار"}</p>
+    `;
+    container.appendChild(card);
   });
 }
 
-window.onload = () => {
-  if (document.getElementById('propertyList')) {
-    displayProperties();
-  }
-};
+function searchProperties() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const type = document.getElementById("typeSelect").value;
+  const filtered = properties.filter(p => 
+    (p.city.toLowerCase().includes(input) || 
+     p.name.toLowerCase().includes(input) || 
+     p.price.includes(input)) &&
+    (type === "all" || p.type === type)
+  );
+  displayProperties(filtered);
+}
+
+window.onload = () => displayProperties(properties);
