@@ -145,61 +145,17 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 
 /* ==================== التجاوبية (Media Queries) - النسخة النهائية والمُصححة ==================== */
 @media (max-width: 992px) {
-    .hamburger-menu {
-        display: block;
-        order: 3;
-    }
-    .navbar .container {
-        flex-wrap: wrap;
-    }
-    .navbar-left {
-        flex-grow: 1;
-    }
-    .navbar-center,
-    .navbar-right {
-        display: none;
-        flex-basis: 100%;
-        flex-direction: column;
-        background-color: #fff;
-        position: absolute;
-        left: 0;
-        width: 100%;
-        padding: 10px 0;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        border-top: 1px solid #eee;
-        gap: 10px;
-    }
-    .navbar-center {
-        top: 68px;
-    }
-    .navbar-right {
-        top: 220px; /* <<< هذا هو التصحيح الأهم */
-    }
-    .navbar-center.active,
-    .navbar-right.active {
-        display: flex;
-    }
-    .nav-links {
-        flex-direction: column;
-        width: 100%;
-        gap: 0;
-    }
-    .nav-links li a {
-        display: block;
-        text-align: center;
-        padding: 12px 0;
-        border-bottom: 1px solid #f5f5f5;
-    }
-    .nav-actions {
-        flex-direction: column;
-        width: 100%;
-        padding: 10px 20px;
-        box-sizing: border-box;
-    }
-    .nav-actions .btn {
-        width: 100%;
-        text-align: center;
-    }
+    .hamburger-menu { display: block; order: 3; }
+    .navbar .container { flex-wrap: wrap; }
+    .navbar-left { flex-grow: 1; }
+    .navbar-center, .navbar-right { display: none; flex-basis: 100%; flex-direction: column; background-color: #fff; position: absolute; left: 0; width: 100%; padding: 10px 0; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 1px solid #eee; gap: 10px; }
+    .navbar-center { top: 68px; }
+    .navbar-right { top: 220px; }
+    .navbar-center.active, .navbar-right.active { display: flex; }
+    .nav-links { flex-direction: column; width: 100%; gap: 0; }
+    .nav-links li a { display: block; text-align: center; padding: 12px 0; border-bottom: 1px solid #f5f5f5; }
+    .nav-actions { flex-direction: column; width: 100%; padding: 10px 20px; box-sizing: border-box; }
+    .nav-actions .btn { width: 100%; text-align: center; }
     .details-layout { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
 }
