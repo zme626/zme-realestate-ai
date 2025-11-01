@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <header class="navbar"><div class="container"><a href="index.html" class="logo">Nova HOME</a></div></header>
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Nova HOME</a>
+        </div>
+    </header>
+
     <div class="auth-page">
         <div class="auth-container">
+            <!-- نموذج تسجيل الدخول -->
             <div class="auth-form" id="login">
                 <h2>تسجيل الدخول</h2>
                 <form id="login-form">
@@ -25,6 +31,8 @@
                 </button>
                 <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
             </div>
+
+            <!-- نموذج إنشاء حساب -->
             <div class="auth-form" id="signup" style="display:none;">
                 <h2>إنشاء حساب جديد</h2>
                 <form id="signup-form">
@@ -38,17 +46,16 @@
         </div>
     </div>
 
-    <!-- === هذا هو التصحيح الأهم === -->
-    <!-- 1. تأكد من أن المسار صحيح 100% -->
+    <!-- 1. ربط ملف Firebase (تأكد من أن المسار صحيح) -->
     <script type="module" src="static/js/firebase.js"></script>
     
-    <!-- 2. ربط ملف script.js الرئيسي -->
+    <!-- 2. ربط ملف script.js الرئيسي (للتبديل بين النماذج) -->
     <script src="script.js"></script>
 
-    <!-- 3. الكود المُصحح بدون حلقة لا نهائية -->
+    <!-- 3. الكود المُصحح لربط الأزرار بالدوال بدون حلقة لا نهائية -->
     <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
-            // سننتظر قليلاً للتأكد من تحميل كل شيء
+            // ننتظر قليلاً للتأكد من تحميل كل شيء
             setTimeout(() => {
                 if (!window.authFunctions) {
                     // إذا لم يتم التحميل، نعرض رسالة خطأ واضحة بدلاً من التعليق
@@ -57,21 +64,24 @@
                     return;
                 }
 
+                // ربط نموذج تسجيل الدخول
                 document.getElementById('login-form').addEventListener('submit', (e) => {
                     e.preventDefault();
                     window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
                 });
 
+                // ربط نموذج إنشاء الحساب
                 document.getElementById('signup-form').addEventListener('submit', (e) => {
                     e.preventDefault();
                     window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
                 });
 
+                // ربط زر جوجل
                 document.getElementById('google-signin-btn').addEventListener('click', () => {
                     window.authFunctions.signInWithGoogle();
                 });
 
-            }, 500); // ننتظر نصف ثانية
+            }, 500); // ننتظر نصف ثانية لضمان تحميل كل شيء
         });
     </script>
 </body>
