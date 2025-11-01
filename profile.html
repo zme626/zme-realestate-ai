@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفي الشخصي - Nova HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- شريط التنقل (سيظهر هنا بشكل المستخدم المسجل) -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">Nova HOME</a>
+            </div>
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">قائمة العقارات</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="navbar-right">
+                <!-- هذا هو شكل شريط التنقل للمستخدم المسجل -->
+                <div class="user-profile-menu">
+                    <button id="user-menu-button" class="user-avatar-button">
+                        <span>مرحباً، محمد</span>
+                        <img src="images/avatar.png" alt="الصورة الرمزية">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div id="user-dropdown" class="user-dropdown">
+                        <a href="profile.html"><i class="fa-solid fa-user"></i> ملفي الشخصي</a>
+                        <a href="#"><i class="fa-solid fa-heart"></i> المفضلة</a>
+                        <a href="index.html" id="logout-button"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</a>
+                    </div>
+                </div>
+            </div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="page-header-section">
+        <div class="container">
+            <h1>الملف الشخصي</h1>
+            <p>أهلاً بك في لوحة التحكم الخاصة بك.</p>
+        </div>
+    </main>
+
+    <section class="profile-page-section">
+        <div class="container">
+            <h2>قيد الإنشاء...</h2>
+            <p>هذه الصفحة ستعرض قريبًا معلومات حسابك وعقاراتك المفضلة.</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

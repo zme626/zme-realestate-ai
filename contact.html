@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - Nova HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <!-- شريط التنقل (سيتم تحديثه لاحقًا) -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">Nova HOME</a>
+            </div>
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">قائمة العقارات</a></li>
+                        <li><a href="property-details.html">العقار</a></li>
+                        <li><a href="contact.html" class="active">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="navbar-right">
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
+                    <a href="login.html#signup" class="btn btn-primary">إنشاء حساب</a>
+                </div>
+            </div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="page-header-section">
+        <div class="container">
+            <h1>تواصل معنا</h1>
+            <p>نحن هنا لمساعدتك. أرسل لنا استفسارك أو تفضل بزيارتنا.</p>
+        </div>
+    </main>
+
+    <section class="contact-page-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- نموذج التواصل -->
+                <div class="contact-form-wrapper">
+                    <h3>أرسل لنا رسالة</h3>
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">الموضوع</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">رسالتك</label>
+                            <textarea id="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">إرسال الرسالة</button>
+                    </form>
+                </div>
+                <!-- معلومات التواصل -->
+                <div class="contact-info-wrapper">
+                    <h3>معلومات التواصل</h3>
+                    <div class="info-box">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h4>عنوان المكتب</h4>
+                            <p>123 شارع التحرير، الدقي، الجيزة، مصر</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>zmetap132@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>رقم الهاتف</h4>
+                            <p>+201063051272</p>
+                        </div>
+                    </div>
+                    <div id="contact-map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
