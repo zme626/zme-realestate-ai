@@ -19,13 +19,16 @@
                     <button type="submit" class="btn btn-primary full-width">تسجيل الدخول</button>
                 </form>
                 <div class="divider"><span>أو</span></div>
-                <button id="google-signin-btn" class="btn-google full-width"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo"> المتابعة باستخدام جوجل</button>
+                <button id="google-signin-btn" class="btn-google full-width">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
+                    المتابعة باستخدام جوجل
+                </button>
                 <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
             </div>
             <div class="auth-form" id="signup" style="display:none;">
                 <h2>إنشاء حساب جديد</h2>
                 <form id="signup-form">
-                    <input type="text" placeholder="الاسم بالكامل" required>
+                    <input type="text" id="signup-name" placeholder="الاسم بالكامل" required>
                     <input type="email" id="signup-email" placeholder="البريد الإلكتروني" required>
                     <input type="password" id="signup-password" placeholder="كلمة المرور" required>
                     <button type="submit" class="btn btn-primary full-width">إنشاء حساب</button>
@@ -36,20 +39,18 @@
     </div>
     <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
-    <script>
+    <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
-            if (!window.authFunctions) { console.error("Auth functions not loaded"); return; }
+            if (!window.authFunctions) { setTimeout(() => document.dispatchEvent(new Event('DOMContentLoaded')), 100); return; }
             document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
             });
             document.getElementById('signup-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value);
+                window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
             });
-            document.getElementById('google-signin-btn').addEventListener('click', function() {
-                window.authFunctions.signInWithGoogle();
-            });
+            document.getElementById('google-signin-btn').addEventListener('click', () => window.authFunctions.signInWithGoogle());
         });
     </script>
 </body>
