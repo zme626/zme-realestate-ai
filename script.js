@@ -1,83 +1,72 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const PROPS_KEY = 'smart_properties_v1';
+// مفتاح التخزين
+const PROPS_KEY = 'properties_v2';
 
-    // بيانات تجريبية أكثر تفصيلاً
-    const seedData = [
-        { id: 1, title: 'فيلا فاخرة بإطلالة على البحر', city: 'جدة', price: 5000000, type: 'sale', rooms: 5, baths: 6, area: 450, image: 'https://via.placeholder.com/400x250.png/005A9C/FFFFFF?text=Villa' },
-        { id: 2, title: 'شقة مودرن في قلب الرياض', city: 'الرياض', price: 1800000, type: 'sale', rooms: 3, baths: 2, area: 180, image: 'https://via.placeholder.com/400x250.png/333333/FFFFFF?text=Apartment' },
-        { id: 3, title: 'شقة للإيجار السنوي في الدمام', city: 'الدمام', price: 45000, type: 'rent', rooms: 2, baths: 1, area: 120, image: 'https://via.placeholder.com/400x250.png/777777/FFFFFF?text=Rent' },
-        { id: 4, title: 'دوبلكس للبيع في حي الياسمين', city: 'الرياض', price: 2500000, type: 'sale', rooms: 4, baths: 4, area: 320, image: 'https://via.placeholder.com/400x250.png/005A9C/FFFFFF?text=Duplex' },
-    ];
+// داتا اختبارية (يمكن التعديل أو الحذف لاحقًا)
+const seed = [
+  { id:'p1', img:'images/prop1.jpg', title:'شقة فاخرة في القاهرة', city:'القاهرة', price:1200000, priceText:'1,200,000 جنيه', type:'sale', desc:'شقة قرب الخدمات.' },
+  { id:'p2', img:'images/prop2.jpg', title:'فيلا مودرن بالاسكندرية', city:'الإسكندرية', price:3000000, priceText:'3,000,000 جنيه', type:'sale', desc:'فيلا بمساحة واسعة.' },
+  { id:'p3', img:'images/prop3.jpg', title:'شقة للإيجار بالجيزة', city:'الجيزة', price:6000, priceText:'6,000 جنيه / شهر', type:'rent', desc:'شقة مفروشة.' },
+  { id:'p4', img:'images/prop4.jpg', title:'مكتب للإيجار في القاهرة', city:'القاهرة', price:12000, priceText:'12,000 جنيه / شهر', type:'rent', desc:'موقع تجاري مميز.' }
+];
 
-    // تهيئة البيانات
-    function initData() {
-        if (!localStorage.getItem(PROPS_KEY)) {
-            localStorage.setItem(PROPS_KEY, JSON.stringify(seedData));
-        }
-    }
+function init(){
+  const existing = JSON.parse(localStorage.getItem(PROPS_KEY) || 'null');
+  if(!existing){ localStorage.setItem(PROPS_KEY, JSON.stringify(seed)); }
+  render(getAll());
+  bindEvents();
+}
 
-    function getProperties() {
-        return JSON.parse(localStorage.getItem(PROPS_KEY) || '[]');
-    }
+function getAll(){ return JSON.parse(localStorage.getItem(PROPS_KEY) || '[]'); }
 
-    // دالة لإنشاء كارت العقار
-    function createPropertyCard(property) {
-        const priceFormatted = property.price.toLocaleString('ar-EG');
-        const priceLabel = property.type === 'sale' ? 'ريال سعودي' : 'ريال/سنة';
+function render(list){
+  const container = document.getElementById('propertyList');
+  if(!container) return;
+  container.innerHTML = '';
+  if(list.length===0){
+    container.innerHTML = '<div style="padding:20px;background:white;border-radius:10px;">لا توجد نتائج</div>';
+    return;
+  }
+  list.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'property-card';
+    el.innerHTML = `
+      <div class="card-media" style="background-image: url('${p.img || ''}');"></div>
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="property-title">${escape(p.title)}</div>
+            <div class="line">${escape(p.city)} • ${p.type === 'sale' ? 'بيع' : 'إيجار'}</div>
+          </div>
+          <div class="badge">${p.type === 'sale' ? 'للبيع' : 'للإيجار'}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="line">${escape(p.desc || '')}</div>
+          <div class="price">${p.priceText}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+}
 
-        return `
-            <div class="property-card" data-id="${property.id}">
-                <img src="${property.image}" alt="${property.title}">
-                <div class="property-info">
-                    <h3 class="property-title">${property.title}</h3>
-                    <p class="property-location">${property.city}</p>
-                    <p class="property-price">${priceFormatted} ${priceLabel}</p>
-                    <div class="property-details">
-                        <span><i class="fas fa-bed"></i> ${property.rooms} غرف</span>
-                        <span><i class="fas fa-bath"></i> ${property.baths} حمامات</span>
-                        <span><i class="fas fa-ruler-combined"></i> ${property.area} م²</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
+function escape(s){ return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-    // عرض العقارات في الشبكة
-    function displayProperties(properties, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = properties.map(createPropertyCard).join('');
-    }
+function search(){
+  const q = (document.getElementById('fQuery')?.value || '').trim().toLowerCase();
+  const type = document.getElementById('fType')?.value || 'all';
+  const cat = document.getElementById('fCategory')?.value || 'all';
+  let list = getAll();
+  if(q){
+    list = list.filter(p => (p.title||'').toLowerCase().includes(q) || (p.city||'').toLowerCase().includes(q) || (p.priceText||'').toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q));
+  }
+  if(type !== 'all') list = list.filter(x=>x.type===type);
+  if(cat !== 'all') list = list.filter(x=> (x.category||'') === cat || (cat==='apartment' && x.title.toLowerCase().includes('شقة')) );
+  render(list);
+}
 
-    // نظام توصيات بسيط (يقترح عقارات من نفس النوع)
-    function displayRecommendations(properties) {
-        const recommendationsContainer = document.getElementById('recommendations-grid');
-        if (!recommendationsContainer) return;
-        
-        // لنفترض أننا نوصي بعقارات للبيع
-        const saleProperties = properties.filter(p => p.type === 'sale').slice(0, 3);
-        recommendationsContainer.innerHTML = saleProperties.map(createPropertyCard).join('');
-    }
+function bindEvents(){
+  document.getElementById('heroSearch')?.addEventListener('click', search);
+  document.getElementById('fQuery')?.addEventListener('keydown', (e)=>{ if(e.key==='Enter') search(); });
+}
 
-    // البحث
-    function handleSearch() {
-        const query = document.getElementById('main-search').value.toLowerCase();
-        const allProperties = getProperties();
-        const filtered = allProperties.filter(p => 
-            p.title.toLowerCase().includes(query) ||
-            p.city.toLowerCase().includes(query)
-        );
-        displayProperties(filtered, 'property-grid');
-    }
-
-    // تهيئة الصفحة
-    initData();
-    const allProps = getProperties();
-    displayProperties(allProps, 'property-grid');
-    displayRecommendations(allProps);
-
-    document.getElementById('search-btn')?.addEventListener('click', handleSearch);
-    document.getElementById('main-search')?.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') handleSearch();
-    });
-});
+window.addEventListener('DOMContentLoaded', init);

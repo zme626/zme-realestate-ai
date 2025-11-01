@@ -1,63 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة عقار الذكية - بيتك الجديد يبدأ من هنا</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>منصة العقارات الذكية</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-content">
-            <div class="logo">عقار الذكية</div>
-            <nav class="main-nav">
-                <a href="index.html" class="active">الرئيسية</a>
-                <a href="#">عقارات للبيع</a>
-                <a href="#">عقارات للإيجار</a>
-                <a href="dashboard.html" class="btn btn-primary">أضف عقارك</a>
-            </nav>
-            <button class="nav-toggle">☰</button>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand"><a href="index.html">منصة العقارات الذكية</a></div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="login.html" class="nav-link">دخول</a>
+        <a href="dashboard.html" class="nav-link btn-primary">لوحة التحكم</a>
+      </nav>
+      <button class="nav-toggle" aria-label="قائمة">قائمة</button>
+    </div>
+  </header>
+
+  <!-- HERO / BANNER -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner">
+      <h1 class="hero-title">ابحث عن عقارك المثالي بسهولة</h1>
+      <p class="hero-sub">أسرع وأذكى منصة للعثور على شقق وفيلات ومكاتب.</p>
+
+      <!-- صندوق البحث الشبيه بالصورة -->
+      <div class="hero-search">
+        <div class="filters">
+          <select id="fType">
+            <option value="all">الكل</option>
+            <option value="sale">بيع</option>
+            <option value="rent">إيجار</option>
+          </select>
+
+          <select id="fCategory">
+            <option value="all">الكل</option>
+            <option value="apartment">شقق</option>
+            <option value="villa">فيلا</option>
+            <option value="office">مكتب</option>
+          </select>
+
+          <input id="fQuery" type="search" placeholder="ابحث بالمدينة أو العنوان أو السعر..." />
+          <button id="heroSearch" class="btn-primary">ابحث</button>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>اكتشف منزل أحلامك بسهولة وذكاء</h1>
-                <p>نستخدم أحدث التقنيات لنقدم لك أفضل العقارات التي تناسب أسلوب حياتك.</p>
-                <div class="search-box">
-                    <input type="text" id="main-search" placeholder="ابحث بالمدينة، الحي، أو اسم العقار...">
-                    <button id="search-btn">بحث</button>
-                </div>
-            </div>
-        </section>
+  <!-- properties list -->
+  <main class="container content">
+    <section class="properties-section">
+      <h2 class="section-title">العقارات</h2>
+      <div id="propertyList" class="property-grid"></div>
+    </section>
+  </main>
 
-        <section class="featured-properties">
-            <div class="container">
-                <h2>أحدث العقارات المضافة</h2>
-                <div id="property-grid" class="property-grid">
-                    <!-- سيتم ملء العقارات هنا عبر JavaScript -->
-                </div>
-            </div>
-        </section>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 منصة العقارات الذكية — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
 
-        <section class="recommendations">
-            <div class="container">
-                <h2>قد يعجبك أيضاً</h2>
-                <div id="recommendations-grid" class="property-grid">
-                    <!-- سيتم ملء التوصيات هنا -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2025 منصة عقار الذكية. جميع الحقوق محفوظة.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
