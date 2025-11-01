@@ -42,11 +42,19 @@ document.addEventListener('DOMContentLoaded', function() {
         userMenuButton.addEventListener('click', (e) => {
             e.stopPropagation();
             userDropdown.classList.toggle('active');
-            userMenuButton.querySelector('i').style.transform = userDropdown.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+            const icon = userMenuButton.querySelector('i');
+            if (icon) {
+                icon.style.transform = userDropdown.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
         });
         document.addEventListener('click', () => {
-            userDropdown.classList.remove('active');
-            userMenuButton.querySelector('i').style.transform = 'rotate(0deg)';
+            if (userDropdown.classList.contains('active')) {
+                userDropdown.classList.remove('active');
+                const icon = userMenuButton.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
         });
     }
 
@@ -60,11 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // تفعيل نموذج تسجيل الدخول (للتجربة فقط)
+    // تفعيل نموذج تسجيل الدخول (للتجربة فقط مع منع الخطأ 405)
     const loginForm = document.querySelector('#login form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            // هذا السطر يمنع المتصفح من إرسال النموذج بالطريقة التقليدية ويمنع خطأ 405
+            e.preventDefault(); 
+            
             // سنفترض أن اسم المستخدم هو "محمد" للتجربة
             localStorage.setItem('loggedInUser', 'محمد');
             window.location.href = 'profile.html';
@@ -82,6 +92,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // باقي الأكواد من قبل...
-    // (يمكنك إضافة أكواد المفضلة والخريطة الأخرى هنا إذا أردت)
+    // تفعيل خريطة صفحة تفاصيل العقار
+    if (document.getElementById('map')) {
+        try {
+            const mapCoordinates = [30.0444, 31.2357]; // إحداثيات القاهرة
+            const map = L.map('map').setView(mapCoordinates, 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            L.marker(mapCoordinates).addTo(map).bindPopup('موقع العقار').openPopup();
+        } catch (e) {
+            console.error("خطأ في تهيئة الخريطة:", e);
+        }
+    }
+
+    // تفعيل زر المفضلة
+    const favoriteButtons = document.querySelectorAll('.favorite-btn');
+    favoriteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            event.stopPropagation();
+            this.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+            } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+            }
+        });
+    });
 });
