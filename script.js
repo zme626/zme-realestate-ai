@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('الموقع جاهز!');
-
+    
     // --- التفاعلية لزر المفضلة (القلب) ---
     const favoriteButtons = document.querySelectorAll('.favorite-btn');
     favoriteButtons.forEach(button => {
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- كود خاص بصفحة تفاصيل العقار ---
     if (document.querySelector('.property-details-page')) {
-
         // 1. تفعيل الخريطة التفاعلية
         try {
             const mapCoordinates = [30.0444, 31.2357]; // إحداثيات القاهرة
@@ -55,5 +53,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
+    }
+
+    // --- تفعيل قائمة الهمبرغر ---
+    const hamburgerButton = document.getElementById('hamburger-menu');
+    const navbarCenter = document.querySelector('.navbar-center');
+    const navbarRight = document.querySelector('.navbar-right');
+
+    if (hamburgerButton && navbarCenter && navbarRight) {
+        hamburgerButton.addEventListener('click', () => {
+            navbarCenter.classList.toggle('active');
+            navbarRight.classList.toggle('active');
+        });
     }
 });

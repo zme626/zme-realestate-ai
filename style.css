@@ -11,12 +11,14 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .top-bar-left i { margin-left: 5px; color: #005c99; }
 .btn-buy-now { background-color: #82b440; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
 
-/* ==================== شريط التنقل (النسخة الاحترافية النهائية) ==================== */
+/* شريط التنقل */
 .navbar { background-color: #fff; padding: 10px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 999; }
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-.navbar-left { display: flex; align-items: center; gap: 25px; }
+.navbar-left { flex-shrink: 0; }
+.navbar-center { flex-grow: 1; display: flex; justify-content: center; }
+.navbar-right { flex-shrink: 0; }
 .logo { font-size: 22px; font-weight: bold; color: #005c99; text-decoration: none; }
-.nav-links ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
 .nav-links li a { text-decoration: none; color: #333; padding: 8px 12px; font-weight: 500; font-size: 15px; transition: color 0.2s, background-color 0.2s; border-radius: 6px; }
 .nav-links li a:hover, .nav-links li a.active { color: #005c99; background-color: #f0f5fa; }
 .nav-actions { display: flex; align-items: center; gap: 12px; }
@@ -101,7 +103,38 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .switch-form { text-align: center; margin-top: 20px; }
 .switch-form a { color: #005c99; font-weight: bold; text-decoration: none; }
 
-/* تجاوب مع الشاشات الصغيرة */
-@media (max-width: 992px) { .details-layout { grid-template-columns: 1fr; } .navbar-left { gap: 10px; } .nav-links li a { padding: 8px; font-size: 14px; } .btn { padding: 8px 15px; } }
-@media (max-width: 880px) { .nav-links { display: none; } }
-@media (max-width: 768px) { .hero-content h1 { font-size: 36px; } .search-bar { flex-direction: column; } .features-list { grid-template-columns: 1fr; } }
+/* قائمة الهمبرغر والتجاوبية */
+.hamburger-menu { display: none; background: none; border: none; font-size: 24px; color: #333; cursor: pointer; }
+
+@media (max-width: 992px) {
+    .navbar-center, .navbar-right {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #fff;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        padding: 10px 20px 20px 20px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        gap: 15px;
+        border-top: 1px solid #eee;
+    }
+    .navbar-center.active, .navbar-right.active {
+        display: flex;
+    }
+    .navbar-right.active {
+        top: 230px; /* يظهر تحت الروابط */
+    }
+    .nav-links { flex-direction: column; width: 100%; gap: 0; }
+    .nav-links li a { display: block; width: 100%; text-align: center; padding: 12px 0; }
+    .nav-actions { flex-direction: column; width: 100%; }
+    .nav-actions .btn { width: 100%; text-align: center; box-sizing: border-box; }
+    .hamburger-menu { display: block; }
+    .details-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 36px; }
+    .search-bar { flex-direction: column; }
+    .features-list { grid-template-columns: 1fr; }
+}

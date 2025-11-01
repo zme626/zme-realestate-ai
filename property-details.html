@@ -23,13 +23,16 @@
         </div>
     </div>
 
-    <!-- شريط التنقل (بالهيكل الجديد والمصحح لهذه الصفحة) -->
+    <!-- شريط التنقل (مع زر الهمبرغر) -->
     <header class="navbar">
         <div class="container">
             <div class="navbar-left">
                 <a href="index.html" class="logo">Nova HOME</a>
-                <nav class="nav-links">
-                    <ul>
+            </div>
+            
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
                         <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="#">قائمة العقارات</a></li>
                         <li><a href="property-details.html" class="active">العقار</a></li>
@@ -37,10 +40,18 @@
                     </ul>
                 </nav>
             </div>
-            <div class="nav-actions">
-                <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
-                <a href="login.html#signup" class="btn btn-primary">إنشاء حساب</a>
+
+            <div class="navbar-right">
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
+                    <a href="login.html#signup" class="btn btn-primary">إنشاء حساب</a>
+                </div>
             </div>
+
+            <!-- زر الهمبرغر الجديد (يظهر فقط في الشاشات الصغيرة) -->
+            <button class="hamburger-menu" id="hamburger-menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </header>
 
