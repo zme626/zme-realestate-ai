@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول / إنشاء حساب - Nova HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Nova HOME</a>
+        </div>
+    </header>
+
+    <div class="auth-page">
+        <div class="auth-container">
+            <!-- نموذج تسجيل الدخول -->
+            <div class="auth-form" id="login">
+                <h2>تسجيل الدخول</h2>
+                <p>مرحباً بعودتك! أدخل بياناتك للمتابعة.</p>
+                <form action="#" method="POST">
+                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+                    <input type="password" name="password" placeholder="كلمة المرور" required>
+                    <button type="submit" class="btn btn-primary full-width">تسجيل الدخول</button>
+                </form>
+                <div class="divider"><span>أو</span></div>
+                <button class="btn-google full-width">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
+                    المتابعة باستخدام جوجل
+                </button>
+                <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
+            </div>
+
+            <!-- نموذج إنشاء حساب -->
+            <div class="auth-form" id="signup" style="display:none;">
+                <h2>إنشاء حساب جديد</h2>
+                <p>انضم إلينا وابدأ في البحث عن عقار أحلامك.</p>
+                <form action="#" method="POST">
+                    <input type="text" name="fullname" placeholder="الاسم بالكامل" required>
+                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+                    <input type="password" name="password" placeholder="كلمة المرور" required>
+                    <button type="submit" class="btn btn-primary full-width">إنشاء حساب</button>
+                </form>
+                <div class="divider"><span>أو</span></div>
+                <button class="btn-google full-width">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
+                    المتابعة باستخدام جوجل
+                </button>
+                <p class="switch-form">لديك حساب بالفعل؟ <a href="#login">سجل الدخول</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login');
+            const signupForm = document.getElementById('signup');
+            const links = document.querySelectorAll('.switch-form a');
+
+            function switchForms() {
+                if (window.location.hash === '#signup') {
+                    loginForm.style.display = 'none';
+                    signupForm.style.display = 'block';
+                } else {
+                    loginForm.style.display = 'block';
+                    signupForm.style.display = 'none';
+                }
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    setTimeout(switchForms, 0);
+                });
+            });
+            switchForms();
+        });
+    </script>
+</body>
+</html>
