@@ -11,15 +11,19 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .top-bar-left i { margin-left: 5px; color: #005c99; }
 .btn-buy-now { background-color: #82b440; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
 
-/* شريط التنقل */
+/* شريط التنقل (النسخة المُحسَّنة) */
 .navbar { background-color: #fff; padding: 15px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 999; }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 24px; font-weight: bold; color: #005c99; text-decoration: none; }
-.nav-links ul { list-style: none; margin: 0; padding: 0; display: flex; }
-.nav-links li a { text-decoration: none; color: #555; padding: 10px 15px; font-weight: 500; transition: color 0.3s; }
-.nav-links li a:hover, .nav-links li a.active { color: #005c99; }
-.btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: #fff; font-weight: bold; border: none; cursor: pointer; }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+.navbar-left { display: flex; align-items: center; gap: 30px; }
+.logo { font-size: 24px; font-weight: bold; color: #005c99; text-decoration: none; flex-shrink: 0; }
+.nav-links ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 5px; }
+.nav-links li a { text-decoration: none; color: #555; padding: 10px 15px; font-weight: 500; transition: color 0.3s, background-color 0.3s; border-radius: 5px; }
+.nav-links li a:hover, .nav-links li a.active { color: #005c99; background-color: #f8f9fa; }
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.btn { padding: 8px 18px; border-radius: 5px; text-decoration: none; color: #fff; font-weight: bold; border: none; cursor: pointer; white-space: nowrap; }
 .btn-primary { background-color: #005c99; }
+.btn-secondary { background-color: #e9ecef; color: #333; border: 1px solid #ddd; }
+.btn-secondary:hover { background-color: #d8dde2; }
 
 /* قسم البحث الرئيسي */
 .hero-section { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/banner.jpg') center/cover no-repeat; height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
@@ -80,15 +84,6 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .map-section { margin-top: 40px; }
 #map { height: 400px; width: 100%; border-radius: 8px; z-index: 1; }
 
-/* تجاوب مع الشاشات الصغيرة */
-@media (max-width: 992px) { .details-layout { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .hero-content h1 { font-size: 36px; } .search-bar { flex-direction: column; } .features-list { grid-template-columns: 1fr; } }
-
-/* تنسيقات أزرار الهيدر الجديدة */
-.btn-secondary { background-color: #e9ecef; color: #333; border: 1px solid #ddd; }
-.btn-secondary:hover { background-color: #d8dde2; }
-.nav-actions { display: flex; gap: 10px; }
-
 /* تنسيقات صفحة تسجيل الدخول */
 .auth-page { display: flex; justify-content: center; align-items: center; min-height: 90vh; background-color: #f4f7f6; }
 .auth-container { background-color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
@@ -104,3 +99,8 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .btn-google img { width: 20px; height: 20px; }
 .switch-form { text-align: center; margin-top: 20px; }
 .switch-form a { color: #005c99; font-weight: bold; text-decoration: none; }
+
+/* تجاوب مع الشاشات الصغيرة */
+@media (max-width: 992px) { .details-layout { grid-template-columns: 1fr; } .navbar-left { gap: 15px; } .nav-links li a { padding: 8px 10px; } }
+@media (max-width: 850px) { .navbar .container { justify-content: center; } .nav-links { order: 3; width: 100%; justify-content: center; display: flex; } }
+@media (max-width: 768px) { .hero-content h1 { font-size: 36px; } .search-bar { flex-direction: column; } .features-list { grid-template-columns: 1fr; } }
