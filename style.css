@@ -16,7 +16,7 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
 .navbar-left { flex-shrink: 0; }
 .navbar-center { flex-grow: 1; display: flex; justify-content: center; }
-.navbar-right { flex-shrink: 0; }
+.navbar-right { flex-shrink: 0; min-width: 150px; display: flex; justify-content: flex-end; }
 .logo { font-size: 22px; font-weight: bold; color: #005c99; text-decoration: none; }
 .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
 .nav-links li a { text-decoration: none; color: #333; padding: 8px 12px; font-weight: 500; font-size: 15px; transition: color 0.2s, background-color 0.2s; border-radius: 6px; }
@@ -34,7 +34,7 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .search-bar { background-color: #fff; padding: 15px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 10px; max-width: 800px; margin: 0 auto; }
 .search-bar input, .search-bar select { padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
 .search-bar input[type="text"] { flex-grow: 1; }
-.btn-search { background-color: #005c99; color: white; padding: 0 25px; font-size: 16px; }
+.btn-search { background-color: #005c99; color: white; padding: 0 25px; font-size: 16px; border: none; cursor: pointer; }
 
 /* قسم العقارات */
 .properties-section { padding: 60px 0; }
@@ -106,6 +106,48 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 /* قائمة الهمبرغر والتجاوبية */
 .hamburger-menu { display: none; background: none; border: none; font-size: 24px; color: #333; cursor: pointer; }
 
+/* ==================== تنسيقات الصفحات العامة ==================== */
+.page-header-section { background-color: #005c99; color: white; padding: 50px 0; text-align: center; }
+.page-header-section h1 { margin: 0; font-size: 42px; }
+.page-header-section p { font-size: 18px; opacity: 0.9; }
+
+/* ==================== تنسيقات صفحة اتصل بنا ==================== */
+.contact-page-section { padding: 80px 0; }
+.contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; }
+.contact-form-wrapper h3, .contact-info-wrapper h3 { font-size: 24px; margin-bottom: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+.info-box { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
+.info-box i { font-size: 24px; color: #005c99; margin-top: 5px; }
+.info-box h4 { margin: 0 0 5px 0; }
+.info-box p { margin: 0; color: #555; }
+#contact-map { height: 250px; width: 100%; border-radius: 8px; margin-top: 20px; }
+
+/* ==================== تنسيقات قائمة المستخدم المنسدلة ==================== */
+.user-profile-menu { position: relative; }
+.user-avatar-button { background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 50px; padding: 5px 15px 5px 5px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-family: 'Cairo', sans-serif; }
+.user-avatar-button img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.user-avatar-button i { font-size: 12px; transition: transform 0.2s; }
+.user-dropdown { display: none; position: absolute; left: 0; top: 110%; background-color: white; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); min-width: 200px; z-index: 1000; overflow: hidden; }
+.user-dropdown.active { display: block; }
+.user-dropdown a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: #333; font-size: 15px; }
+.user-dropdown a:hover { background-color: #f8f9fa; }
+.user-dropdown a i { width: 20px; text-align: center; color: #555; }
+
+/* ==================== تنسيقات صفحة الملف الشخصي ==================== */
+.profile-page-section { padding: 60px 0; }
+.profile-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 800px; margin: 0 auto; }
+.profile-card { background-color: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.07); }
+.profile-card h3 { margin-top: 0; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+.profile-card h3 i { color: #005c99; }
+.profile-card input[disabled] { background-color: #f4f7f6; cursor: not-allowed; }
+.danger-zone { border: 2px solid #e82a2a; }
+.danger-zone h3 i { color: #e82a2a; }
+.btn-danger { background-color: #e82a2a; color: white; width: 100%; }
+.btn-danger:hover { background-color: #c42323; }
+
+/* ==================== التجاوبية (Media Queries) ==================== */
 @media (max-width: 992px) {
     .navbar-center, .navbar-right {
         display: none;
@@ -132,6 +174,7 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
     .nav-actions .btn { width: 100%; text-align: center; box-sizing: border-box; }
     .hamburger-menu { display: block; }
     .details-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
     .hero-content h1 { font-size: 36px; }
@@ -139,138 +182,22 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
     .features-list { grid-template-columns: 1fr; }
 }
 
-/* ==================== تنسيقات الصفحات العامة ==================== */
-.page-header-section {
-    background-color: #005c99;
-    color: white;
-    padding: 50px 0;
-    text-align: center;
+/* ==================== تنسيقات صفحة إضافة عقار ==================== */
+.add-property-section {
+    padding: 60px 0;
 }
-.page-header-section h1 {
-    margin: 0;
-    font-size: 42px;
+.add-property-section .profile-card {
+    max-width: 900px;
+    margin: 0 auto;
 }
-.page-header-section p {
-    font-size: 18px;
-    opacity: 0.9;
-}
-
-/* ==================== تنسيقات صفحة اتصل بنا ==================== */
-.contact-page-section {
-    padding: 80px 0;
-}
-.contact-grid {
+.form-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 30px;
 }
-.contact-form-wrapper h3, .contact-info-wrapper h3 {
-    font-size: 24px;
-    margin-bottom: 30px;
-}
-.form-group {
-    margin-bottom: 20px;
-}
-.form-group label {
+.form-group small {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-.info-box {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-.info-box i {
-    font-size: 24px;
-    color: #005c99;
     margin-top: 5px;
-}
-.info-box h4 {
-    margin: 0 0 5px 0;
-}
-.info-box p {
-    margin: 0;
-    color: #555;
-}
-#contact-map {
-    height: 250px;
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-/* ==================== تنسيقات قائمة المستخدم المنسدلة ==================== */
-.user-profile-menu {
-    position: relative;
-}
-.user-avatar-button {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    padding: 5px 15px 5px 5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-family: 'Cairo', sans-serif;
-}
-.user-avatar-button img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.user-avatar-button i {
-    font-size: 12px;
-    transition: transform 0.2s;
-}
-.user-dropdown {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 110%;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    min-width: 200px;
-    z-index: 1000;
-    overflow: hidden;
-}
-.user-dropdown.active {
-    display: block;
-}
-.user-dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: #333;
-    font-size: 15px;
-}
-.user-dropdown a:hover {
-    background-color: #f8f9fa;
-}
-.user-dropdown a i {
-    width: 20px;
-    text-align: center;
-    color: #555;
-}
-
-/* تعديلات على التجاوبية */
-@media (max-width: 992px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
+    color: #777;
 }
 

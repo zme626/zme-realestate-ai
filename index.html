@@ -22,35 +22,25 @@
         </div>
     </div>
 
-    <!-- شريط التنقل (مع زر الهمبرغر) -->
+    <!-- شريط التنقل -->
     <header class="navbar">
         <div class="container">
             <div class="navbar-left">
                 <a href="index.html" class="logo">Nova HOME</a>
             </div>
-            
             <div class="navbar-center">
                 <nav class="main-nav">
                     <ul class="nav-links">
                         <li><a href="index.html" class="active">الرئيسية</a></li>
                         <li><a href="#">قائمة العقارات</a></li>
-                        <li><a href="property-details.html">العقار</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
                     </ul>
                 </nav>
             </div>
-
             <div class="navbar-right">
-                <div class="nav-actions">
-                    <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
-                    <a href="login.html#signup" class="btn btn-primary">إنشاء حساب</a>
-                </div>
+                <!-- هذا الجزء يتم ملؤه بواسطة script.js -->
             </div>
-
-            <!-- زر الهمبرغر الجديد (يظهر فقط في الشاشات الصغيرة) -->
-            <button class="hamburger-menu" id="hamburger-menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
@@ -78,57 +68,81 @@
     <section class="properties-section">
         <div class="container">
             <h2>العقارات المميزة</h2>
-            <div class="properties-grid">
-                <!-- بطاقة عقار 1 -->
-                <a href="property-details.html" class="property-card-link">
-                    <div class="property-card">
-                        <div class="property-image-container">
-                            <img src="images/property1.jpg" alt="صورة عقار 1">
-                            <div class="property-status for-sale">للبيع</div>
-                            <div class="property-actions">
-                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
-                            </div>
-                        </div>
-                        <div class="property-info">
-                            <h3>فيلا فاخرة في القاهرة</h3>
-                            <p class="address">التجمع الخامس، القاهرة</p>
-                            <div class="features">
-                                <span><i class="fa fa-bed"></i> 4 غرف</span>
-                                <span><i class="fa fa-bath"></i> 5 حمامات</span>
-                                <span><i class="fa fa-ruler-combined"></i> 450 م²</span>
-                            </div>
-                            <div class="price">8,000,000 جنيه</div>
-                        </div>
-                    </div>
-                </a>
-                <!-- بطاقة عقار 2 -->
-                <a href="property-details.html" class="property-card-link">
-                    <div class="property-card">
-                        <div class="property-image-container">
-                            <img src="images/property2.jpg" alt="صورة عقار 2">
-                            <div class="property-status for-rent">للإيجار</div>
-                            <div class="property-actions">
-                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
-                            </div>
-                        </div>
-                        <div class="property-info">
-                            <h3>شقة مودرن في الشيخ زايد</h3>
-                            <p class="address">الشيخ زايد، الجيزة</p>
-                            <div class="features">
-                                <span><i class="fa fa-bed"></i> 2 غرف</span>
-                                <span><i class="fa fa-bath"></i> 2 حمامات</span>
-                                <span><i class="fa fa-ruler-combined"></i> 180 م²</span>
-                            </div>
-                            <div class="price">15,000 جنيه / شهرياً</div>
-                        </div>
-                    </div>
-                </a>
+            <!-- سيتم ملء هذا الجزء ديناميكيًا بواسطة JavaScript -->
+            <div class="properties-grid" id="properties-grid">
+                <!-- يتم عرض بطاقات العقارات الحقيقية من Firestore هنا -->
+                <p>جاري تحميل العقارات...</p>
             </div>
         </div>
     </section>
 
+    <!-- ربط ملفات الجافاسكريبت -->
+    <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
+
+    <!-- كود جافاسكريبت خاص بالصفحة الرئيسية لجلب البيانات -->
+    <script type="module">
+        const propertiesGrid = document.getElementById('properties-grid');
+
+        async function loadProperties() {
+            // التأكد من أن دوال قاعدة البيانات قد تم تحميلها
+            if (!window.dbFunctions || !window.dbFunctions.getProperties) {
+                console.error("Firestore functions not available yet.");
+                propertiesGrid.innerHTML = '<p>خطأ في تهيئة قاعدة البيانات. يرجى المحاولة مرة أخرى.</p>';
+                return;
+            }
+
+            try {
+                const properties = await window.dbFunctions.getProperties();
+                propertiesGrid.innerHTML = ''; // تفريغ رسالة "جاري التحميل"
+
+                if (properties.length === 0) {
+                    propertiesGrid.innerHTML = '<p>لا توجد عقارات متاحة حاليًا.</p>';
+                    return;
+                }
+
+                properties.forEach(prop => {
+                    const priceString = prop.type === 'rent' 
+                        ? `${prop.price.toLocaleString()} جنيه / شهرياً`
+                        : `${prop.price.toLocaleString()} جنيه`;
+
+                    const card = `
+                        <a href="property-details.html?id=${prop.id}" class="property-card-link">
+                            <div class="property-card">
+                                <div class="property-image-container">
+                                    <img src="${prop.imageUrl}" alt="${prop.title}">
+                                    <div class="property-status ${prop.type === 'sale' ? 'for-sale' : 'for-rent'}">
+                                        ${prop.type === 'sale' ? 'للبيع' : 'للإيجار'}
+                                    </div>
+                                    <div class="property-actions">
+                                        <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
+                                        <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                                    </div>
+                                </div>
+                                <div class="property-info">
+                                    <h3>${prop.title}</h3>
+                                    <p class="address">${prop.address}</p>
+                                    <div class="features">
+                                        <span><i class="fa fa-bed"></i> ${prop.bedrooms} غرف</span>
+                                        <span><i class="fa fa-bath"></i> ${prop.bathrooms} حمامات</span>
+                                        <span><i class="fa fa-ruler-combined"></i> ${prop.area} م²</span>
+                                    </div>
+                                    <div class="price">${priceString}</div>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    propertiesGrid.innerHTML += card;
+                });
+            } catch (error) {
+                console.error("Error loading properties: ", error);
+                propertiesGrid.innerHTML = '<p>حدث خطأ أثناء تحميل العقارات. يرجى التحقق من وحدة التحكم.</p>';
+            }
+        }
+
+        // استدعاء الدالة عند تحميل الصفحة
+        loadProperties();
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة عقار جديد - Nova HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
+            <div class="navbar-center">
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="navbar-right"></div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="page-header-section">
+        <div class="container">
+            <h1>أضف عقارك</h1>
+            <p>املأ النموذج التالي لعرض عقارك للآلاف من المشترين المحتملين.</p>
+        </div>
+    </main>
+
+    <section class="add-property-section">
+        <div class="container">
+            <form id="add-property-form" class="profile-card">
+                <h3>تفاصيل العقار الأساسية</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="prop-title">عنوان الإعلان</label>
+                        <input type="text" id="prop-title" placeholder="مثال: فيلا للبيع في التجمع الخامس" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prop-address">العنوان</label>
+                        <input type="text" id="prop-address" placeholder="مثال: شارع التسعين، القاهرة الجديدة" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prop-type">نوع العرض</label>
+                        <select id="prop-type" required>
+                            <option value="sale">للبيع</option>
+                            <option value="rent">للإيجار</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prop-price">السعر (بالجنيه)</label>
+                        <input type="number" id="prop-price" placeholder="مثال: 5000000" required>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">المواصفات</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="prop-bedrooms">عدد غرف النوم</label>
+                        <input type="number" id="prop-bedrooms" value="1" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prop-bathrooms">عدد الحمامات</label>
+                        <input type="number" id="prop-bathrooms" value="1" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prop-area">المساحة (م²)</label>
+                        <input type="number" id="prop-area" placeholder="مثال: 150" required>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 40px;">الوسائط</h3>
+                <div class="form-group">
+                    <label for="prop-image">رابط صورة العقار</label>
+                    <input type="text" id="prop-image" placeholder="https://example.com/image.jpg" value="images/default.jpg" required>
+                    <small>مؤقتًا، سنستخدم رابطًا. لاحقًا سنقوم بتفعيل رفع الصور.</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 18px;">إضافة العقار الآن</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ربط ملفات الجافاسكريبت -->
+    <script type="module" src="static/js/firebase.js"></script>
+    <script src="script.js"></script>
+
+    <!-- كود جافاسكريبت خاص بصفحة إضافة عقار -->
+    <script type="module">
+        // التأكد من أن المستخدم مسجل دخوله
+        window.authFunctions.onAuthStateChanged(window.authFunctions.auth, (user) => {
+            if (!user) {
+                alert("يجب عليك تسجيل الدخول أولاً لإضافة عقار.");
+                window.location.href = 'login.html';
+            }
+        });
+
+        const addPropertyForm = document.getElementById('add-property-form');
+        addPropertyForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = window.authFunctions.auth.currentUser;
+
+            // تجميع بيانات العقار من النموذج
+            const propertyData = {
+                title: document.getElementById('prop-title').value,
+                address: document.getElementById('prop-address').value,
+                type: document.getElementById('prop-type').value,
+                price: Number(document.getElementById('prop-price').value),
+                bedrooms: Number(document.getElementById('prop-bedrooms').value),
+                bathrooms: Number(document.getElementById('prop-bathrooms').value),
+                area: Number(document.getElementById('prop-area').value),
+                imageUrl: document.getElementById('prop-image').value,
+                ownerId: user.uid, // <<< مهم: ربط العقار بصاحبه
+                addedAt: new Date() // تاريخ الإضافة
+            };
+
+            try {
+                // استدعاء دالة إضافة العقار من firebase.js
+                await window.dbFunctions.addProperty(propertyData);
+                alert('تمت إضافة عقارك بنجاح!');
+                window.location.href = 'dashboard.html'; // توجيه المستخدم للوحة التحكم
+            } catch (error) {
+                alert('حدث خطأ أثناء إضافة العقار. يرجى المحاولة مرة أخرى.');
+                console.error("Error in form submission: ", error);
+            }
+        });
+    </script>
+</body>
+</html>

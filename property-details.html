@@ -10,117 +10,124 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-left">
-                <span><i class="fa-solid fa-envelope"></i> zmetap132@gmail.com</span>
-                <span><i class="fa-solid fa-phone"></i> +201063051272</span>
-            </div>
-            <div class="top-bar-right">
-                <a href="#" class="btn btn-buy-now">اشترِ الآن</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- شريط التنقل (مع زر الهمبرغر) -->
+    <!-- شريط التنقل -->
     <header class="navbar">
         <div class="container">
-            <div class="navbar-left">
-                <a href="index.html" class="logo">Nova HOME</a>
-            </div>
-            
+            <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
             <div class="navbar-center">
                 <nav class="main-nav">
                     <ul class="nav-links">
                         <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="#">قائمة العقارات</a></li>
-                        <li><a href="property-details.html" class="active">العقار</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
                     </ul>
                 </nav>
             </div>
-
-            <div class="navbar-right">
-                <div class="nav-actions">
-                    <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
-                    <a href="login.html#signup" class="btn btn-primary">إنشاء حساب</a>
-                </div>
-            </div>
-
-            <!-- زر الهمبرغر الجديد (يظهر فقط في الشاشات الصغيرة) -->
-            <button class="hamburger-menu" id="hamburger-menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <div class="navbar-right"></div>
+            <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <main class="property-details-page">
+    <!-- سيتم ملء هذا الجزء بالكامل بواسطة JavaScript -->
+    <main id="property-details-content" class="property-details-page">
         <div class="container">
-            <!-- عنوان العقار والسعر -->
-            <div class="details-header">
-                <div>
-                    <h1>فيلا فاخرة في القاهرة</h1>
-                    <p class="address"><i class="fa-solid fa-location-dot"></i> التجمع الخامس، القاهرة</p>
-                </div>
-                <div class="price-tag">8,000,000 جنيه</div>
-            </div>
-
-            <!-- معرض الصور -->
-            <div class="gallery">
-                <div class="main-image">
-                    <img src="images/property1-large.jpg" alt="صورة رئيسية للعقار" id="main-gallery-image">
-                </div>
-                <div class="thumbnail-images">
-                    <img src="images/property1-thumb1.jpg" alt="صورة مصغرة 1" class="active">
-                    <img src="images/property1-thumb2.jpg" alt="صورة مصغرة 2">
-                    <img src="images/property1-thumb3.jpg" alt="صورة مصغرة 3">
-                </div>
-            </div>
-
-            <div class="details-layout">
-                <!-- الوصف والمميزات -->
-                <div class="main-content">
-                    <h2>وصف العقار</h2>
-                    <p>فيلا فاخرة تقع في قلب التجمع الخامس، تتميز بتصميمها العصري وتشطيباتها عالية الجودة...</p>
-                    <h2>المواصفات الأساسية</h2>
-                    <div class="basic-specs">
-                        <span><i class="fa fa-bed"></i> <b>4</b> غرف نوم</span>
-                        <span><i class="fa fa-bath"></i> <b>5</b> حمامات</span>
-                        <span><i class="fa fa-ruler-combined"></i> <b>450</b> م²</span>
-                        <span><i class="fa-solid fa-car"></i> <b>2</b> مواقف</span>
-                    </div>
-                    <h2>المميزات الإضافية</h2>
-                    <ul class="features-list">
-                        <li><i class="fa-solid fa-check"></i> مسبح خاص</li>
-                        <li><i class="fa-solid fa-check"></i> حديقة خاصة</li>
-                        <li><i class="fa-solid fa-check"></i> نظام تكييف مركزي</li>
-                    </ul>
-                </div>
-
-                <!-- نموذج التواصل -->
-                <aside class="sidebar">
-                    <div class="contact-form-box">
-                        <h3>تواصل مع الوكيل</h3>
-                        <form>
-                            <input type="text" placeholder="الاسم" required>
-                            <input type="email" placeholder="البريد الإلكتروني" required>
-                            <textarea rows="5" placeholder="مرحباً، أنا مهتم بهذا العقار..." required></textarea>
-                            <button type="submit" class="btn btn-primary full-width">إرسال رسالة</button>
-                        </form>
-                    </div>
-                </aside>
-            </div>
-
-            <!-- الخريطة -->
-            <div class="map-section">
-                <h2>موقع العقار</h2>
-                <div id="map"></div>
-            </div>
+            <p style="text-align: center; padding: 50px 0;">جاري تحميل تفاصيل العقار...</p>
         </div>
     </main>
 
+    <!-- ربط ملفات الجافاسكريبت -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
+
+    <!-- كود جافاسكريبت خاص بصفحة تفاصيل العقار -->
+    <script type="module">
+        const contentDiv = document.getElementById('property-details-content');
+
+        async function loadPropertyDetails() {
+            // 1. قراءة الـ ID من رابط URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+
+            if (!propertyId) {
+                contentDiv.innerHTML = '<div class="container"><p>خطأ: لم يتم تحديد مُعرّف العقار.</p></div>';
+                return;
+            }
+
+            try {
+                // 2. جلب بيانات العقار المحدد من Firestore
+                const prop = await window.dbFunctions.getPropertyById(propertyId);
+
+                if (!prop) {
+                    contentDiv.innerHTML = '<div class="container"><p>خطأ: العقار المطلوب غير موجود.</p></div>';
+                    return;
+                }
+
+                // 3. تغيير عنوان الصفحة
+                document.title = `${prop.title} - Nova HOME`;
+
+                // 4. بناء كود HTML الديناميكي
+                const priceString = prop.type === 'rent' 
+                    ? `${prop.price.toLocaleString()} جنيه / شهرياً`
+                    : `${prop.price.toLocaleString()} جنيه`;
+
+                const htmlContent = `
+                    <div class="container">
+                        <div class="details-header">
+                            <div>
+                                <h1>${prop.title}</h1>
+                                <p class="address"><i class="fa-solid fa-location-dot"></i> ${prop.address}</p>
+                            </div>
+                            <div class="price-tag">${priceString}</div>
+                        </div>
+                        <div class="gallery">
+                            <div class="main-image">
+                                <img src="${prop.imageUrl}" alt="صورة رئيسية للعقار">
+                            </div>
+                        </div>
+                        <div class="details-layout">
+                            <div class="main-content">
+                                <h2>المواصفات الأساسية</h2>
+                                <div class="basic-specs">
+                                    <span><i class="fa fa-bed"></i> <b>${prop.bedrooms}</b> غرف نوم</span>
+                                    <span><i class="fa fa-bath"></i> <b>${prop.bathrooms}</b> حمامات</span>
+                                    <span><i class="fa fa-ruler-combined"></i> <b>${prop.area}</b> م²</span>
+                                </div>
+                            </div>
+                            <aside class="sidebar">
+                                <div class="contact-form-box">
+                                    <h3>تواصل مع الوكيل</h3>
+                                    <form>
+                                        <input type="text" placeholder="الاسم" required>
+                                        <input type="email" placeholder="البريد الإلكتروني" required>
+                                        <textarea rows="5" placeholder="مرحباً، أنا مهتم بهذا العقار..." required></textarea>
+                                        <button type="submit" class="btn btn-primary full-width">إرسال رسالة</button>
+                                    </form>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="map-section">
+                            <h2>موقع العقار</h2>
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                `;
+
+                // 5. وضع الكود في الصفحة
+                contentDiv.innerHTML = htmlContent;
+
+                // 6. تفعيل الخريطة (بعد وضعها في الصفحة)
+                const map = L.map('map').setView([30.0444, 31.2357], 13); // إحداثيات افتراضية
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                L.marker([30.0444, 31.2357]).addTo(map).bindPopup(prop.address).openPopup();
+
+            } catch (error) {
+                console.error("Error loading property details: ", error);
+                contentDiv.innerHTML = '<div class="container"><p>حدث خطأ أثناء تحميل تفاصيل العقار.</p></div>';
+            }
+        }
+
+        loadPropertyDetails();
+    </script>
 </body>
 </html>
