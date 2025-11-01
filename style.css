@@ -1,18 +1,8 @@
 /* إعدادات أساسية وخطوط */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap');
 
-body {
-    font-family: 'Cairo', sans-serif;
-    margin: 0;
-    background-color: #f4f7f6;
-    color: #333;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; color: #333; }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
 /* الشريط العلوي */
 .top-bar { background-color: #222; color: #ccc; padding: 8px 0; font-size: 14px; }
@@ -32,7 +22,8 @@ body {
 .btn-primary { background-color: #2a41e8; }
 
 /* قسم البحث الرئيسي */
-.hero-section { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-background.jpg') center/cover no-repeat; height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+/* ==================== هذا هو السطر الذي تم تصحيحه ==================== */
+.hero-section { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/banner.jpg') center/cover no-repeat; height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
 .hero-content h1 { font-size: 48px; margin-bottom: 30px; }
 .search-bar { background-color: #fff; padding: 15px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 10px; max-width: 800px; margin: 0 auto; }
 .search-bar input, .search-bar select { padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
@@ -91,11 +82,5 @@ body {
 #map { height: 400px; width: 100%; border-radius: 8px; z-index: 1; }
 
 /* تجاوب مع الشاشات الصغيرة */
-@media (max-width: 992px) {
-    .details-layout { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-    .hero-content h1 { font-size: 36px; }
-    .search-bar { flex-direction: column; }
-    .features-list { grid-template-columns: 1fr; }
-}
+@media (max-width: 992px) { .details-layout { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .hero-content h1 { font-size: 36px; } .search-bar { flex-direction: column; } .features-list { grid-template-columns: 1fr; } }
