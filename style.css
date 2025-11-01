@@ -1,100 +1,84 @@
-document.addEventListener('DOMContentLoaded', function() {
+/* ==================== التجاوبية (Media Queries) ==================== */
 
-    // =================================================================
-    // 1. حارس حالة المصادقة (يعمل في كل الصفحات)
-    // =================================================================
-    const navbarRight = document.querySelector('.navbar-right');
-
-    if (navbarRight && window.authFunctions) {
-        window.authFunctions.onAuthStateChanged(window.authFunctions.auth, (user) => {
-            if (user) {
-                // المستخدم مسجل الدخول
-                const userName = user.displayName || user.email.split('@')[0];
-                navbarRight.innerHTML = `
-                    <div class="user-profile-menu">
-                        <button id="user-menu-button" class="user-avatar-button">
-                            <span>مرحباً، ${userName}</span>
-                            <img src="${user.photoURL || 'images/avatar.png'}" alt="الصورة الرمزية">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div id="user-dropdown" class="user-dropdown">
-                            <a href="dashboard.html"><i class="fa-solid fa-table-columns"></i> لوحة التحكم</a>
-                            <a href="profile.html"><i class="fa-solid fa-user"></i> ملفي الشخصي</a>
-                            <a href="#" id="logout-button"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</a>
-                        </div>
-                    </div>`;
-                
-                const userMenuButton = document.getElementById('user-menu-button');
-                const userDropdown = document.getElementById('user-dropdown');
-                if (userMenuButton && userDropdown) {
-                    userMenuButton.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        userDropdown.classList.toggle('active');
-                    });
-                    document.addEventListener('click', () => {
-                        if (userDropdown.classList.contains('active')) {
-                            userDropdown.classList.remove('active');
-                        }
-                    });
-                }
-
-                const logoutButton = document.getElementById('logout-button');
-                if (logoutButton) {
-                    logoutButton.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.authFunctions.userSignOut();
-                    });
-                }
-
-            } else {
-                // المستخدم غير مسجل الدخول
-                navbarRight.innerHTML = `
-                    <div class="nav-actions">
-                        <a href="login.html" class="btn btn-secondary">تسجيل الدخول</a>
-                        <a href="login.html" class="btn btn-primary">إنشاء حساب</a>
-                    </div>`;
-            }
-        });
+@media (max-width: 992px) {
+    /* إعدادات زر الهمبرغر */
+    .hamburger-menu {
+        display: block;
+        order: 3; /* يظهر في أقصى اليمين */
+    }
+    .navbar .container {
+        flex-wrap: wrap;
+    }
+    .navbar-left {
+        flex-grow: 1;
     }
 
-    // =================================================================
-    // 2. === الكود المُصحح لتفعيل قائمة الهمبرغر ===
-    // =================================================================
-    const hamburgerButton = document.getElementById('hamburger-menu');
-    const navbarCenter = document.querySelector('.navbar-center');
-    // سنستهدف نفس العنصر الذي يحتوي على الأزرار
-    const mobileNavRight = document.querySelector('.navbar-right'); 
-
-    if (hamburgerButton && navbarCenter && mobileNavRight) {
-        hamburgerButton.addEventListener('click', () => {
-            // عند الضغط، قم بإظهار أو إخفاء كلتا القائمتين معًا
-            navbarCenter.classList.toggle('active');
-            mobileNavRight.classList.toggle('active');
-        });
+    /* إعدادات القوائم المنسدلة (الروابط والأزرار) */
+    .navbar-center,
+    .navbar-right {
+        display: none; /* إخفاء القوائم بشكل افتراضي */
+        flex-basis: 100%;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute; /* مهم لجعلها تظهر فوق المحتوى */
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-top: 1px solid #eee;
+        gap: 10px;
     }
 
-    // =================================================================
-    // 3. كود خاص بصفحة تسجيل الدخول (التبديل بين النماذج)
-    // =================================================================
-    if (document.getElementById('login') && document.getElementById('signup')) {
-        const loginForm = document.getElementById('login');
-        const signupForm = document.getElementById('signup');
-        const switchToSignup = document.querySelector('a[href="#signup"]');
-        const switchToLogin = document.querySelector('a[href="#login"]');
-
-        if (switchToSignup) {
-            switchToSignup.addEventListener('click', (e) => {
-                e.preventDefault();
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'block';
-            });
-        }
-        if (switchToLogin) {
-            switchToLogin.addEventListener('click', (e) => {
-                e.preventDefault();
-                signupForm.style.display = 'none';
-                loginForm.style.display = 'block';
-            });
-        }
+    /* تحديد مكان ظهور قائمة الروابط */
+    .navbar-center {
+        top: 68px; /* تظهر مباشرة تحت شريط التنقل */
     }
-});
+
+    /* === هذا هو التصحيح الأهم === */
+    /* تحديد مكان ظهور قائمة الأزرار (أسفل قائمة الروابط) */
+    .navbar-right {
+        /* القيمة 220px هي قيمة تقديرية لارتفاع قائمة الروابط. 
+           هذا يضمن أن قائمة الأزرار تبدأ بعد انتهاء قائمة الروابط. */
+        top: 220px; 
+    }
+
+    /* عند الضغط على زر الهمبرغر، أظهر القوائم */
+    .navbar-center.active,
+    .navbar-right.active {
+        display: flex;
+    }
+
+    /* تنسيق الروابط داخل القائمة المنسدلة */
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+    .nav-links li a {
+        display: block;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    /* تنسيق الأزرار داخل القائمة المنسدلة */
+    .nav-actions {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 20px;
+        box-sizing: border-box;
+    }
+    .nav-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* تعديلات إضافية لصفحات أخرى */
+    .details-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 36px; }
+    .search-bar { flex-direction: column; }
+}
