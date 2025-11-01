@@ -29,7 +29,7 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
                     المتابعة باستخدام جوجل
                 </button>
-                <p class="switch-form">ليس لديك حساب؟ <a href="#signup">أنشئ حسابًا الآن</a></p>
+                <p class="switch-form">ليس لديك حساب؟ <a href="#signup" id="switch-to-signup">أنشئ حسابًا الآن</a></p>
             </div>
 
             <!-- نموذج إنشاء حساب -->
@@ -41,47 +41,63 @@
                     <input type="password" id="signup-password" placeholder="كلمة المرور" required>
                     <button type="submit" class="btn btn-primary full-width">إنشاء حساب</button>
                 </form>
-                <p class="switch-form">لديك حساب بالفعل؟ <a href="#login">سجل الدخول</a></p>
+                <p class="switch-form">لديك حساب بالفعل؟ <a href="#login" id="switch-to-login">سجل الدخول</a></p>
             </div>
         </div>
     </div>
 
-    <!-- 1. ربط ملف Firebase (تأكد من أن المسار صحيح) -->
+    <!-- === الكود المدمج والمُصحح === -->
+    <!-- 1. تحميل Firebase أولاً (مهم جدًا) -->
     <script type="module" src="static/js/firebase.js"></script>
-    
-    <!-- 2. ربط ملف script.js الرئيسي (للتبديل بين النماذج) -->
-    <script src="script.js"></script>
 
-    <!-- 3. الكود المُصحح لربط الأزرار بالدوال بدون حلقة لا نهائية -->
+    <!-- 2. كل أكواد الجافاسكريبت الخاصة بالصفحة في مكان واحد -->
     <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
-            // ننتظر قليلاً للتأكد من تحميل كل شيء
+            
+            // --- الجزء الأول: التبديل بين النماذج (من ملف script.js) ---
+            const loginForm = document.getElementById('login');
+            const signupForm = document.getElementById('signup');
+            const switchToSignup = document.getElementById('switch-to-signup');
+            const switchToLogin = document.getElementById('switch-to-login');
+
+            if (switchToSignup) {
+                switchToSignup.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loginForm.style.display = 'none';
+                    signupForm.style.display = 'block';
+                });
+            }
+            if (switchToLogin) {
+                switchToLogin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    signupForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                });
+            }
+
+            // --- الجزء الثاني: ربط الأزرار بوظائف Firebase ---
             setTimeout(() => {
                 if (!window.authFunctions) {
-                    // إذا لم يتم التحميل، نعرض رسالة خطأ واضحة بدلاً من التعليق
-                    console.error("فشل تحميل دوال Firebase. تأكد من صحة المسار إلى firebase.js واتصالك بالإنترنت.");
-                    alert("حدث خطأ في الاتصال بالخادم. يرجى تحديث الصفحة والمحاولة مرة أخرى.");
+                    console.error("فشل تحميل دوال Firebase.");
+                    alert("حدث خطأ في الاتصال بالخادم. يرجى تحديث الصفحة.");
                     return;
                 }
 
-                // ربط نموذج تسجيل الدخول
                 document.getElementById('login-form').addEventListener('submit', (e) => {
                     e.preventDefault();
                     window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
                 });
 
-                // ربط نموذج إنشاء الحساب
                 document.getElementById('signup-form').addEventListener('submit', (e) => {
                     e.preventDefault();
                     window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
                 });
 
-                // ربط زر جوجل
                 document.getElementById('google-signin-btn').addEventListener('click', () => {
                     window.authFunctions.signInWithGoogle();
                 });
 
-            }, 500); // ننتظر نصف ثانية لضمان تحميل كل شيء
+            }, 500); // ننتظر نصف ثانية لضمان تحميل Firebase
         });
     </script>
 </body>
