@@ -55,29 +55,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('login');
-            const signupForm = document.getElementById('signup');
-            const links = document.querySelectorAll('.switch-form a');
-
-            function switchForms() {
-                if (window.location.hash === '#signup') {
-                    loginForm.style.display = 'none';
-                    signupForm.style.display = 'block';
-                } else {
-                    loginForm.style.display = 'block';
-                    signupForm.style.display = 'none';
-                }
-            }
-
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    setTimeout(switchForms, 0);
-                });
-            });
-            switchForms();
-        });
-    </script>
+    <!-- ==================== السطر المفقود الذي تم إضافته هنا ==================== -->
+    <script src="script.js"></script>
 </body>
 </html>
