@@ -37,20 +37,41 @@
             </div>
         </div>
     </div>
+
+    <!-- === هذا هو التصحيح الأهم === -->
+    <!-- 1. تأكد من أن المسار صحيح 100% -->
     <script type="module" src="static/js/firebase.js"></script>
+    
+    <!-- 2. ربط ملف script.js الرئيسي -->
     <script src="script.js"></script>
+
+    <!-- 3. الكود المُصحح بدون حلقة لا نهائية -->
     <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
-            if (!window.authFunctions) { setTimeout(() => document.dispatchEvent(new Event('DOMContentLoaded')), 100); return; }
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
-            });
-            document.getElementById('signup-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
-            });
-            document.getElementById('google-signin-btn').addEventListener('click', () => window.authFunctions.signInWithGoogle());
+            // سننتظر قليلاً للتأكد من تحميل كل شيء
+            setTimeout(() => {
+                if (!window.authFunctions) {
+                    // إذا لم يتم التحميل، نعرض رسالة خطأ واضحة بدلاً من التعليق
+                    console.error("فشل تحميل دوال Firebase. تأكد من صحة المسار إلى firebase.js واتصالك بالإنترنت.");
+                    alert("حدث خطأ في الاتصال بالخادم. يرجى تحديث الصفحة والمحاولة مرة أخرى.");
+                    return;
+                }
+
+                document.getElementById('login-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
+                });
+
+                document.getElementById('signup-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
+                });
+
+                document.getElementById('google-signin-btn').addEventListener('click', () => {
+                    window.authFunctions.signInWithGoogle();
+                });
+
+            }, 500); // ننتظر نصف ثانية
         });
     </script>
 </body>
