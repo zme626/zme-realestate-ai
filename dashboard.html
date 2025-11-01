@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم | موقع العقارات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>مرحبًا بك في لوحة التحكم</h1>
+    <p>يمكنك هنا إضافة أو تعديل العقارات بسهولة.</p>
+
+    <button onclick="logout()">تسجيل الخروج</button>
+
+    <div class="property-form">
+      <h2>إضافة عقار جديد</h2>
+      <input type="text" id="title" placeholder="عنوان العقار">
+      <input type="text" id="price" placeholder="السعر">
+      <textarea id="description" placeholder="وصف العقار"></textarea>
+      <button onclick="addProperty()">حفظ العقار</button>
+    </div>
+
+    <h2>العقارات المضافة</h2>
+    <ul id="propertyList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
