@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- تم تحديث العنوان -->
     <title>Nova HOME - موقع عقارات</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-    <!-- الشريط العلوي الأسود (تم تحديث المعلومات) -->
+    <!-- ==================== الجزء الأول: الشريط العلوي ==================== -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
@@ -23,7 +22,7 @@
         </div>
     </div>
 
-    <!-- شريط التنقل الرئيسي (تم تحديث الشعار) -->
+    <!-- ==================== الجزء الثاني: شريط التنقل ==================== -->
     <header class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Nova HOME</a>
@@ -41,12 +40,79 @@
         </div>
     </header>
 
-    <!-- باقي محتوى الصفحة يبقى كما هو -->
+    <!-- ==================== الجزء الثالث: قسم البحث (هذا ما كان مفقودًا) ==================== -->
     <main class="hero-section">
-        <!-- ... -->
+        <div class="hero-content">
+            <h1>ابحث عن منزل أحلامك</h1>
+            <div class="search-bar">
+                <select>
+                    <option>شراء</option>
+                    <option>إيجار</option>
+                </select>
+                <select>
+                    <option>شقق</option>
+                    <option>فلل</option>
+                    <option>أراضي</option>
+                </select>
+                <input type="text" placeholder="ابحث بالمنطقة أو العنوان...">
+                <button class="btn-search"><i class="fa fa-search"></i> بحث</button>
+            </div>
+        </div>
     </main>
+
+    <!-- ==================== الجزء الرابع: كروت العقارات (هذا ما كان مفقودًا) ==================== -->
     <section class="properties-section">
-        <!-- ... -->
+        <div class="container">
+            <h2>العقارات المميزة</h2>
+            <div class="properties-grid">
+                <!-- بطاقة عقار 1 -->
+                <a href="property-details.html" class="property-card-link">
+                    <div class="property-card">
+                        <div class="property-image-container">
+                            <img src="images/property1.jpg" alt="صورة عقار 1">
+                            <div class="property-status for-sale">للبيع</div>
+                            <div class="property-actions">
+                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
+                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                            </div>
+                        </div>
+                        <div class="property-info">
+                            <h3>فيلا فاخرة في الرياض</h3>
+                            <p class="address">حي الياسمين، الرياض</p>
+                            <div class="features">
+                                <span><i class="fa fa-bed"></i> 4 غرف</span>
+                                <span><i class="fa fa-bath"></i> 5 حمامات</span>
+                                <span><i class="fa fa-ruler-combined"></i> 450 م²</span>
+                            </div>
+                            <div class="price">$500,000</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- بطاقة عقار 2 -->
+                <a href="property-details.html" class="property-card-link">
+                    <div class="property-card">
+                        <div class="property-image-container">
+                            <img src="images/property2.jpg" alt="صورة عقار 2">
+                            <div class="property-status for-rent">للإيجار</div>
+                            <div class="property-actions">
+                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
+                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                            </div>
+                        </div>
+                        <div class="property-info">
+                            <h3>شقة مودرن مطلة على البحر</h3>
+                            <p class="address">أبراج دبي، دبي</p>
+                            <div class="features">
+                                <span><i class="fa fa-bed"></i> 2 غرف</span>
+                                <span><i class="fa fa-bath"></i> 2 حمامات</span>
+                                <span><i class="fa fa-ruler-combined"></i> 180 م²</span>
+                            </div>
+                            <div class="price">$3,394 / شهرياً</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </section>
 
     <script src="script.js"></script>
