@@ -1,66 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>منصة العقارات الذكية</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عقارات AI | الرئيسية</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand"><a href="index.html">منصة العقارات الذكية</a></div>
-      <nav class="nav">
-        <a href="index.html" class="nav-link">الرئيسية</a>
-        <a href="login.html" class="nav-link">دخول</a>
-        <a href="dashboard.html" class="nav-link btn-primary">لوحة التحكم</a>
-      </nav>
-      <button class="nav-toggle" aria-label="قائمة">قائمة</button>
-    </div>
+  <header class="navbar">
+    <div class="logo">عقارات<span>AI</span></div>
+    <nav>
+      <ul>
+        <li><a href="#">الرئيسية</a></li>
+        <li><a href="#">العقارات</a></li>
+        <li><a href="#">الإيجار</a></li>
+        <li><a href="#">الشراء</a></li>
+        <li><a href="#">تواصل معنا</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- HERO / BANNER -->
   <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-inner">
-      <h1 class="hero-title">ابحث عن عقارك المثالي بسهولة</h1>
-      <p class="hero-sub">أسرع وأذكى منصة للعثور على شقق وفيلات ومكاتب.</p>
-
-      <!-- صندوق البحث الشبيه بالصورة -->
-      <div class="hero-search">
-        <div class="filters">
-          <select id="fType">
-            <option value="all">الكل</option>
-            <option value="sale">بيع</option>
-            <option value="rent">إيجار</option>
-          </select>
-
-          <select id="fCategory">
-            <option value="all">الكل</option>
-            <option value="apartment">شقق</option>
-            <option value="villa">فيلا</option>
-            <option value="office">مكتب</option>
-          </select>
-
-          <input id="fQuery" type="search" placeholder="ابحث بالمدينة أو العنوان أو السعر..." />
-          <button id="heroSearch" class="btn-primary">ابحث</button>
-        </div>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>ابحث عن منزل أحلامك بسهولة</h1>
+      <p>أفضل العروض العقارية للبيع والإيجار في مكان واحد</p>
+      <div class="search-box">
+        <input type="text" placeholder="ابحث عن عقار...">
+        <button>بحث</button>
       </div>
     </div>
   </section>
 
-  <!-- properties list -->
-  <main class="container content">
-    <section class="properties-section">
-      <h2 class="section-title">العقارات</h2>
-      <div id="propertyList" class="property-grid"></div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 منصة العقارات الذكية — جميع الحقوق محفوظة</p>
-    </div>
+  <footer>
+    <p>© 2025 عقارات AI - جميع الحقوق محفوظة</p>
   </footer>
 
   <script src="script.js"></script>
