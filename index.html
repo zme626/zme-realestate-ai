@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepress - موقع عقارات</title>
     <link rel="stylesheet" href="style.css">
-    <!-- مكتبة أيقونات Font Awesome ضرورية للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -23,15 +22,15 @@
         </div>
     </div>
 
-    <!-- 1. شريط التنقل الرئيسي -->
+    <!-- شريط التنقل الرئيسي -->
     <header class="navbar">
         <div class="container">
-            <a href="#" class="logo">homepress</a>
+            <a href="index.html" class="logo">homepress</a>
             <nav class="nav-links">
                 <ul>
-                    <li><a href="#" class="active">الرئيسية</a></li>
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
                     <li><a href="#">قائمة العقارات</a></li>
-                    <li><a href="#">العقار</a></li>
+                    <li><a href="property-details.html">العقار</a></li>
                     <li><a href="#">صفحات</a></li>
                 </ul>
             </nav>
@@ -41,7 +40,7 @@
         </div>
     </header>
 
-    <!-- 2. قسم البحث الرئيسي -->
+    <!-- قسم البحث الرئيسي -->
     <main class="hero-section">
         <div class="hero-content">
             <h1>ابحث عن منزل أحلامك</h1>
@@ -61,54 +60,58 @@
         </div>
     </main>
 
-    <!-- 3. قسم عرض العقارات -->
+    <!-- قسم عرض العقارات -->
     <section class="properties-section">
         <div class="container">
             <h2>العقارات المميزة</h2>
             <div class="properties-grid">
-                <!-- بطاقة عقار 1 -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="images/property1.jpg" alt="صورة عقار 1">
-                        <div class="property-status for-sale">للبيع</div>
-                        <div class="property-actions">
-                            <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                <!-- بطاقة عقار 1 (أصبحت رابط) -->
+                <a href="property-details.html" class="property-card-link">
+                    <div class="property-card">
+                        <div class="property-image-container">
+                            <img src="images/property1.jpg" alt="صورة عقار 1">
+                            <div class="property-status for-sale">للبيع</div>
+                            <div class="property-actions">
+                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
+                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                            </div>
+                        </div>
+                        <div class="property-info">
+                            <h3>فيلا فاخرة في الرياض</h3>
+                            <p class="address">حي الياسمين، الرياض</p>
+                            <div class="features">
+                                <span><i class="fa fa-bed"></i> 4 غرف</span>
+                                <span><i class="fa fa-bath"></i> 5 حمامات</span>
+                                <span><i class="fa fa-ruler-combined"></i> 450 م²</span>
+                            </div>
+                            <div class="price">$500,000</div>
                         </div>
                     </div>
-                    <div class="property-info">
-                        <h3>فيلا فاخرة في الرياض</h3>
-                        <p class="address">حي الياسمين، الرياض</p>
-                        <div class="features">
-                            <span><i class="fa fa-bed"></i> 4 غرف</span>
-                            <span><i class="fa fa-bath"></i> 5 حمامات</span>
-                            <span><i class="fa fa-ruler-combined"></i> 450 م²</span>
+                </a>
+                <!-- بطاقة عقار 2 (أصبحت رابط) -->
+                <a href="property-details.html" class="property-card-link">
+                    <div class="property-card">
+                        <div class="property-image-container">
+                            <img src="images/property2.jpg" alt="صورة عقار 2">
+                            <div class="property-status for-rent">للإيجار</div>
+                            <div class="property-actions">
+                                <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
+                                <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                            </div>
                         </div>
-                        <div class="price">$500,000</div>
-                    </div>
-                </div>
-                <!-- بطاقة عقار 2 -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="images/property2.jpg" alt="صورة عقار 2">
-                        <div class="property-status for-rent">للإيجار</div>
-                        <div class="property-actions">
-                            <button class="action-btn favorite-btn" title="إضافة للمفضلة"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn compare-btn" title="إضافة للمقارنة"><i class="fa-solid fa-right-left"></i></button>
+                        <div class="property-info">
+                            <h3>شقة مودرن مطلة على البحر</h3>
+                            <p class="address">أبراج دبي، دبي</p>
+                            <div class="features">
+                                <span><i class="fa fa-bed"></i> 2 غرف</span>
+                                <span><i class="fa fa-bath"></i> 2 حمامات</span>
+                                <span><i class="fa fa-ruler-combined"></i> 180 م²</span>
+                            </div>
+                            <div class="price">$3,394 / شهرياً</div>
                         </div>
                     </div>
-                    <div class="property-info">
-                        <h3>شقة مودرن مطلة على البحر</h3>
-                        <p class="address">أبراج دبي، دبي</p>
-                        <div class="features">
-                            <span><i class="fa fa-bed"></i> 2 غرف</span>
-                            <span><i class="fa fa-bath"></i> 2 حمامات</span>
-                            <span><i class="fa fa-ruler-combined"></i> 180 م²</span>
-                        </div>
-                        <div class="price">$3,394 / شهرياً</div>
-                    </div>
-                </div>
-                <!-- يمكنك إضافة المزيد من البطاقات هنا -->
+                </a>
+                <!-- يمكنك إضافة المزيد من البطاقات هنا بنفس الطريقة -->
             </div>
         </div>
     </section>

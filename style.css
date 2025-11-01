@@ -1,4 +1,6 @@
-/* إعدادات أساسية */
+/* إعدادات أساسية وخطوط */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap');
+
 body {
     font-family: 'Cairo', sans-serif;
     margin: 0;
@@ -13,141 +15,87 @@ body {
 }
 
 /* الشريط العلوي */
-.top-bar {
-    background-color: #222;
-    color: #ccc;
-    padding: 8px 0;
-    font-size: 14px;
-}
-.top-bar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.top-bar-left span {
-    margin-left: 20px;
-}
-.top-bar-left i {
-    margin-left: 5px;
-    color: #2a41e8;
-}
-.btn-buy-now {
-    background-color: #82b440;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 13px;
-}
+.top-bar { background-color: #222; color: #ccc; padding: 8px 0; font-size: 14px; }
+.top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+.top-bar-left span { margin-left: 20px; }
+.top-bar-left i { margin-left: 5px; color: #2a41e8; }
+.btn-buy-now { background-color: #82b440; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
 
-/* 1. شريط التنقل */
-.navbar {
-    background-color: #fff;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    position: sticky; /* يجعله يلتصق بالأعلى عند التمرير */
-    top: 0;
-    z-index: 1000;
-}
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2a41e8;
-    text-decoration: none;
-}
+/* شريط التنقل */
+.navbar { background-color: #fff; padding: 15px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 999; }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 24px; font-weight: bold; color: #2a41e8; text-decoration: none; }
 .nav-links ul { list-style: none; margin: 0; padding: 0; display: flex; }
 .nav-links li a { text-decoration: none; color: #555; padding: 10px 15px; font-weight: 500; transition: color 0.3s; }
 .nav-links li a:hover, .nav-links li a.active { color: #2a41e8; }
-.btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: #fff; font-weight: bold; }
+.btn { padding: 10px 20px; border-radius: 5px; text-decoration: none; color: #fff; font-weight: bold; border: none; cursor: pointer; }
 .btn-primary { background-color: #2a41e8; }
 
-/* 2. قسم البحث الرئيسي */
-.hero-section {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-background.jpg') center/cover no-repeat;
-    height: 55vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-}
+/* قسم البحث الرئيسي */
+.hero-section { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-background.jpg') center/cover no-repeat; height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
 .hero-content h1 { font-size: 48px; margin-bottom: 30px; }
-.search-bar { background-color: #fff; padding: 15px; border-radius: 8px; display: flex; gap: 10px; max-width: 800px; margin: 0 auto; }
+.search-bar { background-color: #fff; padding: 15px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 10px; max-width: 800px; margin: 0 auto; }
 .search-bar input, .search-bar select { padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
 .search-bar input[type="text"] { flex-grow: 1; }
-.btn-search { background-color: #2a41e8; color: white; border: none; padding: 0 25px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+.btn-search { background-color: #2a41e8; color: white; padding: 0 25px; font-size: 16px; }
 
-/* 3. قسم العقارات */
+/* قسم العقارات */
 .properties-section { padding: 60px 0; }
 .properties-section h2 { text-align: center; font-size: 32px; margin-bottom: 40px; }
 .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-.property-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: transform 0.3s;
-}
+.property-card-link { text-decoration: none; color: inherit; }
+.property-card { background-color: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); overflow: hidden; transition: transform 0.3s; }
 .property-card:hover { transform: translateY(-5px); }
-
-.property-image-container {
-    position: relative;
-}
+.property-image-container { position: relative; }
 .property-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
-
-/* تسمية حالة العقار */
-.property-status {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-}
-.property-status.for-sale { background-color: #2a41e8; } /* أزرق للبيع */
-.property-status.for-rent { background-color: #82b440; } /* أخضر للإيجار */
-
-/* أزرار الإجراءات على الصورة */
-.property-actions {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    display: flex;
-    gap: 8px;
-}
-.action-btn {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-}
-.action-btn:hover {
-    background-color: #2a41e8;
-    color: white;
-}
-.action-btn.active {
-    background-color: #e82a2a; /* لون أحمر عند التفعيل */
-    color: white;
-}
-
+.property-status { position: absolute; top: 15px; right: 15px; color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.property-status.for-sale { background-color: #2a41e8; }
+.property-status.for-rent { background-color: #82b440; }
+.property-actions { position: absolute; bottom: 10px; left: 10px; display: flex; gap: 8px; }
+.action-btn { background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 50%; width: 36px; height: 36px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.action-btn:hover { background-color: #2a41e8; color: white; }
+.action-btn.active { background-color: #e82a2a; color: white; }
 .property-info { padding: 20px; }
 .property-info h3 { margin: 0 0 5px 0; font-size: 18px; }
 .property-info .address { color: #777; font-size: 14px; margin-bottom: 15px; }
 .features { display: flex; gap: 15px; color: #555; margin-bottom: 15px; }
 .features span i { margin-left: 5px; color: #2a41e8; }
 .price { font-size: 22px; font-weight: bold; color: #2a41e8; text-align: left; }
+
+/* تنسيقات صفحة تفاصيل العقار */
+.property-details-page { padding: 40px 0; }
+.details-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; flex-wrap: wrap; }
+.details-header h1 { margin: 0; }
+.details-header .address { color: #777; font-size: 16px; }
+.price-tag { font-size: 28px; font-weight: bold; color: #2a41e8; }
+.gallery { margin-bottom: 30px; }
+.main-image img { width: 100%; height: 500px; object-fit: cover; border-radius: 8px; }
+.thumbnail-images { display: flex; gap: 10px; margin-top: 10px; }
+.thumbnail-images img { width: 100px; height: 75px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.3s; }
+.thumbnail-images img:hover, .thumbnail-images img.active { border-color: #2a41e8; }
+.details-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+.main-content h2 { font-size: 24px; margin-top: 0; padding-bottom: 10px; border-bottom: 1px solid #eee; margin-bottom: 20px; }
+.basic-specs { display: flex; flex-wrap: wrap; gap: 20px; background-color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+.basic-specs span { font-size: 16px; color: #555; }
+.basic-specs i { color: #2a41e8; margin-left: 8px; }
+.features-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.features-list li { font-size: 16px; }
+.features-list i { color: #82b440; margin-left: 8px; }
+.sidebar { position: relative; }
+.contact-form-box { background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: sticky; top: 100px; }
+.contact-form-box h3 { margin-top: 0; text-align: center; }
+.contact-form-box form { display: flex; flex-direction: column; gap: 15px; }
+.contact-form-box input, .contact-form-box textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+.full-width { width: 100%; }
+.map-section { margin-top: 40px; }
+#map { height: 400px; width: 100%; border-radius: 8px; z-index: 1; }
+
+/* تجاوب مع الشاشات الصغيرة */
+@media (max-width: 992px) {
+    .details-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 36px; }
+    .search-bar { flex-direction: column; }
+    .features-list { grid-template-columns: 1fr; }
+}
