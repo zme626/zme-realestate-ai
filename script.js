@@ -46,16 +46,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mainImage && thumbnails.length > 0) {
             thumbnails.forEach(thumb => {
                 thumb.addEventListener('click', function() {
-                    const largeImageSrc = this.src.replace(/-thumb\d/, '-large');
-                    mainImage.src = largeImageSrc;
-                    document.querySelector('.thumbnail-images .active').classList.remove('active');
+                    // هذا الكود لتغيير الصورة الكبيرة بناءً على الصورة المصغرة
+                    // يجب أن تكون أسماء الصور متناسقة (مثال: property-large.jpg و property-thumb.jpg)
+                    mainImage.src = this.src; // أبسط طريقة هي جعل الصورة المصغرة هي نفسها الكبيرة مؤقتًا
+                    
+                    // إزالة كلاس 'active' من الصورة النشطة حاليًا
+                    document.querySelector('.thumbnail-images img.active').classList.remove('active');
+                    // إضافة كلاس 'active' للصورة التي تم الضغط عليها
                     this.classList.add('active');
                 });
             });
         }
     }
 
-    // --- تفعيل قائمة الهمبرغر ---
+    // --- تفعيل قائمة الهمبرغر (النسخة الصحيحة) ---
     const hamburgerButton = document.getElementById('hamburger-menu');
     const navbarCenter = document.querySelector('.navbar-center');
     const navbarRight = document.querySelector('.navbar-right');
