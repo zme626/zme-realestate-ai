@@ -8,19 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
                 <span><i class="fa-solid fa-envelope"></i> zmetap132@gmail.com</span>
                 <span><i class="fa-solid fa-phone"></i> +201063051272</span>
             </div>
-            <div class="top-bar-right">
-                <a href="#" class="btn btn-buy-now">اشترِ الآن</a>
-            </div>
+            <div class="top-bar-right"><a href="#" class="btn btn-buy-now">اشترِ الآن</a></div>
         </div>
     </div>
-
     <header class="navbar">
         <div class="container">
             <div class="navbar-left"><a href="index.html" class="logo">Nova HOME</a></div>
@@ -42,7 +38,6 @@
             <button class="hamburger-menu" id="hamburger-menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
-
     <main class="hero-section">
         <div class="hero-content">
             <h1>ابحث عن منزل أحلامك</h1>
@@ -54,14 +49,12 @@
             </div>
         </div>
     </main>
-
     <section class="properties-section">
         <div class="container">
             <h2>العقارات المميزة</h2>
             <div class="properties-grid" id="properties-grid"><p>جاري تحميل العقارات...</p></div>
         </div>
     </section>
-
     <script type="module" src="static/js/firebase.js"></script>
     <script src="script.js"></script>
     <script type="module">
@@ -71,37 +64,13 @@
             try {
                 const properties = await window.dbFunctions.getProperties();
                 propertiesGrid.innerHTML = '';
-                if (properties.length === 0) {
-                    propertiesGrid.innerHTML = '<p>لا توجد عقارات متاحة حاليًا.</p>';
-                    return;
-                }
+                if (properties.length === 0) { propertiesGrid.innerHTML = '<p>لا توجد عقارات متاحة حاليًا.</p>'; return; }
                 properties.forEach(prop => {
                     const priceString = prop.type === 'rent' ? `${prop.price.toLocaleString()} جنيه / شهرياً` : `${prop.price.toLocaleString()} جنيه`;
-                    const card = `
-                        <a href="property-details.html?id=${prop.id}" class="property-card-link">
-                            <div class="property-card">
-                                <div class="property-image-container">
-                                    <img src="${prop.imageUrl}" alt="${prop.title}">
-                                    <div class="property-status ${prop.type === 'sale' ? 'for-sale' : 'for-rent'}">${prop.type === 'sale' ? 'للبيع' : 'للإيجار'}</div>
-                                </div>
-                                <div class="property-info">
-                                    <h3>${prop.title}</h3>
-                                    <p class="address">${prop.address}</p>
-                                    <div class="features">
-                                        <span><i class="fa fa-bed"></i> ${prop.bedrooms} غرف</span>
-                                        <span><i class="fa fa-bath"></i> ${prop.bathrooms} حمامات</span>
-                                        <span><i class="fa fa-ruler-combined"></i> ${prop.area} م²</span>
-                                    </div>
-                                    <div class="price">${priceString}</div>
-                                </div>
-                            </div>
-                        </a>`;
+                    const card = `<a href="property-details.html?id=${prop.id}" class="property-card-link"><div class="property-card"><div class="property-image-container"><img src="${prop.imageUrl}" alt="${prop.title}"><div class="property-status ${prop.type === 'sale' ? 'for-sale' : 'for-rent'}">${prop.type === 'sale' ? 'للبيع' : 'للإيجار'}</div></div><div class="property-info"><h3>${prop.title}</h3><p class="address">${prop.address}</p><div class="features"><span><i class="fa fa-bed"></i> ${prop.bedrooms} غرف</span><span><i class="fa fa-bath"></i> ${prop.bathrooms} حمامات</span><span><i class="fa fa-ruler-combined"></i> ${prop.area} م²</span></div><div class="price">${priceString}</div></div></div></a>`;
                     propertiesGrid.innerHTML += card;
                 });
-            } catch (error) {
-                console.error("Error loading properties: ", error);
-                propertiesGrid.innerHTML = '<p>حدث خطأ أثناء تحميل العقارات.</p>';
-            }
+            } catch (error) { console.error("Error loading properties: ", error); propertiesGrid.innerHTML = '<p>حدث خطأ أثناء تحميل العقارات.</p>'; }
         }
         loadProperties();
     </script>

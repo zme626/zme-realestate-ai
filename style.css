@@ -75,7 +75,7 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 /* قائمة الهمبرغر والتجاوبية */
 .hamburger-menu { display: none; background: none; border: none; font-size: 24px; color: #333; cursor: pointer; }
 
-/* تنسيقات قائمة المستخدم المنسدلة */
+/* قائمة المستخدم المنسدلة */
 .user-profile-menu { position: relative; }
 .user-avatar-button { background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 50px; padding: 5px 15px 5px 5px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-family: 'Cairo', sans-serif; }
 .user-avatar-button img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
@@ -87,7 +87,7 @@ body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f7f6; c
 .user-dropdown a:hover { background-color: #f8f9fa; }
 .user-dropdown a i { width: 20px; text-align: center; color: #555; }
 
-/* ==================== التجاوبية (Media Queries) - النسخة النهائية والمُصححة ==================== */
+/* التجاوبية (Media Queries) - النسخة النهائية والمُصححة */
 @media (max-width: 992px) {
     .hamburger-menu { display: block; order: 3; }
     .navbar .container { flex-wrap: wrap; }

@@ -8,15 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">Nova HOME</a>
-        </div>
-    </header>
-
+    <header class="navbar"><div class="container"><a href="index.html" class="logo">Nova HOME</a></div></header>
     <div class="auth-page">
         <div class="auth-container">
-            <!-- نموذج تسجيل الدخول -->
             <div class="auth-form" id="login">
                 <h2>تسجيل الدخول</h2>
                 <form id="login-form">
@@ -25,14 +19,9 @@
                     <button type="submit" class="btn btn-primary full-width">تسجيل الدخول</button>
                 </form>
                 <div class="divider"><span>أو</span></div>
-                <button id="google-signin-btn" class="btn-google full-width">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
-                    المتابعة باستخدام جوجل
-                </button>
+                <button id="google-signin-btn" class="btn-google full-width"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo"> المتابعة باستخدام جوجل</button>
                 <p class="switch-form">ليس لديك حساب؟ <a href="#signup" id="switch-to-signup">أنشئ حسابًا الآن</a></p>
             </div>
-
-            <!-- نموذج إنشاء حساب -->
             <div class="auth-form" id="signup" style="display:none;">
                 <h2>إنشاء حساب جديد</h2>
                 <form id="signup-form">
@@ -45,59 +34,21 @@
             </div>
         </div>
     </div>
-
-    <!-- === الكود المدمج والمُصحح === -->
-    <!-- 1. تحميل Firebase أولاً (مهم جدًا) -->
     <script type="module" src="static/js/firebase.js"></script>
-
-    <!-- 2. كل أكواد الجافاسكريبت الخاصة بالصفحة في مكان واحد -->
     <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // --- الجزء الأول: التبديل بين النماذج (من ملف script.js) ---
             const loginForm = document.getElementById('login');
             const signupForm = document.getElementById('signup');
             const switchToSignup = document.getElementById('switch-to-signup');
             const switchToLogin = document.getElementById('switch-to-login');
-
-            if (switchToSignup) {
-                switchToSignup.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    loginForm.style.display = 'none';
-                    signupForm.style.display = 'block';
-                });
-            }
-            if (switchToLogin) {
-                switchToLogin.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    signupForm.style.display = 'none';
-                    loginForm.style.display = 'block';
-                });
-            }
-
-            // --- الجزء الثاني: ربط الأزرار بوظائف Firebase ---
+            if (switchToSignup) { switchToSignup.addEventListener('click', (e) => { e.preventDefault(); loginForm.style.display = 'none'; signupForm.style.display = 'block'; }); }
+            if (switchToLogin) { switchToLogin.addEventListener('click', (e) => { e.preventDefault(); signupForm.style.display = 'none'; loginForm.style.display = 'block'; }); }
             setTimeout(() => {
-                if (!window.authFunctions) {
-                    console.error("فشل تحميل دوال Firebase.");
-                    alert("حدث خطأ في الاتصال بالخادم. يرجى تحديث الصفحة.");
-                    return;
-                }
-
-                document.getElementById('login-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value);
-                });
-
-                document.getElementById('signup-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value);
-                });
-
-                document.getElementById('google-signin-btn').addEventListener('click', () => {
-                    window.authFunctions.signInWithGoogle();
-                });
-
-            }, 500); // ننتظر نصف ثانية لضمان تحميل Firebase
+                if (!window.authFunctions) { console.error("فشل تحميل دوال Firebase."); alert("حدث خطأ في الاتصال بالخادم. يرجى تحديث الصفحة."); return; }
+                document.getElementById('login-form').addEventListener('submit', (e) => { e.preventDefault(); window.authFunctions.signInWithEmail(document.getElementById('login-email').value, document.getElementById('login-password').value); });
+                document.getElementById('signup-form').addEventListener('submit', (e) => { e.preventDefault(); window.authFunctions.signUpWithEmail(document.getElementById('signup-email').value, document.getElementById('signup-password').value, document.getElementById('signup-name').value); });
+                document.getElementById('google-signin-btn').addEventListener('click', () => { window.authFunctions.signInWithGoogle(); });
+            }, 500);
         });
     </script>
 </body>
